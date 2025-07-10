@@ -1,13 +1,15 @@
 import Login from "./pages/Login";
 import Header from "./components/layout/Header";
+import Home from "./pages/home/Home";
 
 function App() {
   return (
     <>
       <Header />
-      <div className="flex min-h-svh flex-col items-center justify-center">
+      <Home />
+      {/* <div className="flex min-h-svh flex-col items-center justify-center">
         <Login />
-      </div>
+      </div> */}
       {/* <div>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
         <p>Start editing to see some magic happen :)</p>
