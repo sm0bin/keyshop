@@ -62,7 +62,7 @@ const shopFeatures = [
 
 const ShopFeatures = () => {
   return (
-    <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black py-12 px-4">
+    <section className=" py-12 px-4">
       <div className="max-w-6xl mx-auto text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-white">
           Why Shop With Us?
