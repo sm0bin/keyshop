@@ -1,12 +1,11 @@
 import Hero from "./components/Hero";
+import ShopFeatures from "./components/ShopFeatures";
 
 const Home = () => {
   return (
-    <div className="space-y-4 pt-16">
+    <div className="pt-16">
       <Hero />
-      <div className="w-full bg-slate-300 h-40 flex justify-center items-center rounded-md text-2xl font-bold">
-        <h1>Services</h1>
-      </div>
+      <ShopFeatures />
       <div className="w-full bg-slate-300 h-40 flex justify-center items-center rounded-md text-2xl font-bold">
         <h1>Featured Products</h1>
       </div>
