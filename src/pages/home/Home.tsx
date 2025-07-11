@@ -1,11 +1,9 @@
-import React from "react";
+import Hero from "./components/Hero";
 
 const Home = () => {
   return (
-    <div className="space-y-4 pt-20 px-5">
-      <div className="w-full bg-slate-300 h-40 flex justify-center items-center rounded-md text-2xl font-bold">
-        <h1>Hero</h1>
-      </div>
+    <div className="space-y-4 pt-16">
+      <Hero />
       <div className="w-full bg-slate-300 h-40 flex justify-center items-center rounded-md text-2xl font-bold">
         <h1>Services</h1>
       </div>
