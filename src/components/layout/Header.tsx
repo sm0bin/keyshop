@@ -40,7 +40,7 @@ const Header = () => {
     >
       <div className="flex items-center">
         <Link className="text-2xl font-bold text-white rounded-md" to="/">
-          KeyShop
+          MechaKeys
         </Link>
       </div>
       <div className="flex items-center gap-1 font-medium text-lg text-white">
