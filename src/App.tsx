@@ -1,12 +1,14 @@
 import Login from "./pages/Login";
 import Header from "./components/layout/Header";
 import Home from "./pages/home/Home";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <>
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black w-full min-h-svh">
       <Header />
-      <Home />
+      <Outlet />
+      {/* <Home /> */}
       {/* <div className="flex min-h-svh flex-col items-center justify-center">
         <Login />
       </div> */}
@@ -128,7 +130,7 @@ function App() {
           asperiores enim quisquam mollitia ex, labore et.
         </p>
       </div> */}
-    </>
+    </div>
   );
 }
 
