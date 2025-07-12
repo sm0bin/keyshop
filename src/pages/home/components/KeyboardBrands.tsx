@@ -64,12 +64,12 @@ const KeyboardBrands = () => {
             <span className="text-white font-semibold">{brand.name}</span>
           </div>
         ))} */}
-      <Carousel>
-        <CarouselContent className="">
+      <Carousel className="max-w-6xl mx-auto">
+        <CarouselContent>
           {keyboardBrands.map((brand) => (
             <CarouselItem
               key={brand.name}
-              className="md:basis-1/3 lg:basis-1/5"
+              className="md:basis-1/3 lg:basis-1/4"
             >
               <div
                 key={brand.name}
@@ -78,7 +78,7 @@ const KeyboardBrands = () => {
                 <img
                   src={brand.icon}
                   alt={brand.name}
-                  className="size-40 object-contain mb-3"
+                  className="size-40 object-contain mb-3 grayscale "
                 />
                 <h4 className="text-white text-lg">{brand.name}</h4>
               </div>

@@ -20,8 +20,8 @@ const navLinks = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className=" text-white pt-12 pb-6 px-4">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 backdrop-blur-md bg-white/5 rounded-2xl p-8 border border-white/10 shadow-md">
+    <footer className="max-w-7xl mx-auto text-white pt-12 pb-6 px-4">
+      <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 backdrop-blur-md bg-white/5 rounded-2xl p-8 border border-white/10 shadow-md">
         {/* Logo + Description */}
         <div>
           <h2 className="text-2xl font-bold mb-2">MechaKeys</h2>
