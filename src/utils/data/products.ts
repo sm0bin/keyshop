@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 1,
+    isDeleted: false,
     image: "https://i.ibb.co/V1D2hfG/k-01.jpg",
     title: "K1 RGB Pro Mechanical Keyboard",
     brand: "Redragon",
@@ -11,7 +11,7 @@ export const products = [
       "Experience precision with the K1 RGB Pro, designed for fast and accurate keystrokes. The keyboard features vibrant per-key RGB lighting and a durable metal build. Ideal for both gamers and typists seeking reliability and performance.",
   },
   {
-    id: 2,
+    isDeleted: false,
     image: "https://i.ibb.co/WW03jfSK/k-02.jpg",
     title: "K2 Tournament Edition",
     brand: "Razer",
@@ -22,7 +22,7 @@ export const products = [
       "The K2 Tournament Edition offers a compact layout and Razer Green switches for a tactile feel. Designed for esports players, it boasts lightning-fast response times. Enjoy immersive RGB effects with full customization.",
   },
   {
-    id: 3,
+    isDeleted: false,
     image: "https://i.ibb.co/gGVdBny/k-03.jpg",
     title: "K3 Ultra RGB Backlit",
     brand: "Logitech",
@@ -33,7 +33,7 @@ export const products = [
       "This sleek, ultra-thin mechanical keyboard delivers a satisfying keystroke with each press. The soft white backlight ensures clarity in any environment. Built with Logitech's renowned quality for modern workspaces.",
   },
   {
-    id: 4,
+    isDeleted: false,
     image: "https://i.ibb.co/SDw7Mg95/k-04.jpg",
     title: "K4 Wireless Mechanical",
     brand: "HP",
@@ -44,7 +44,7 @@ export const products = [
       "Go wireless with the K4, combining performance and convenience. It features dual connectivity modes and reliable brown mechanical switches. Perfect for professionals who demand speed and silence.",
   },
   {
-    id: 5,
+    isDeleted: false,
     image: "https://i.ibb.co/hRHP5qrC/k-05.jpg",
     title: "K5 Macro Pro RGB",
     brand: "A4Tech",
@@ -55,7 +55,7 @@ export const products = [
       "Designed for macro lovers, the K5 Pro delivers programmable shortcuts and full RGB zones. The ergonomic keycaps enhance typing comfort during long sessions. Built to meet the demands of gamers and creators alike.",
   },
   {
-    id: 6,
+    isDeleted: false,
     image: "https://i.ibb.co/Q7mtKNdS/k-06.jpg",
     title: "K6 Wireless Gaming Board",
     brand: "HP",
@@ -66,7 +66,7 @@ export const products = [
       "Enjoy uninterrupted gameplay with the HP K6’s fast wireless tech and battery life. Equipped with tactile switches for accurate input. A stylish frame and backlighting elevate your setup.",
   },
   {
-    id: 7,
+    isDeleted: false,
     image: "https://i.ibb.co/352vw1XY/k-07.jpg",
     title: "K7 Optical Mechanical RGB",
     brand: "ASUS ROG",
@@ -77,7 +77,7 @@ export const products = [
       "ASUS ROG’s K7 is built for speed with optical-mechanical switches. It offers near-instantaneous input and military-grade durability. Ideal for competitive gamers who want an edge.",
   },
   {
-    id: 8,
+    isDeleted: false,
     image: "https://i.ibb.co/fdrMVY5N/k-08.jpg",
     title: "K8 Compact Hot-Swap Board",
     brand: "Redragon",
@@ -88,7 +88,7 @@ export const products = [
       "The K8 features hot-swappable keys and a 75% layout to save space. It's ideal for gamers on the move or those who love customization. Built with premium Redragon engineering.",
   },
   {
-    id: 9,
+    isDeleted: false,
     image: "https://i.ibb.co/QvLTvbhP/k-09.jpg",
     title: "K9 RGB Aluminum Edition",
     brand: "Corsair",
@@ -99,7 +99,7 @@ export const products = [
       "Crafted with an aluminum frame, the K9 provides ultimate stability. The RGB lighting system offers endless visual effects. A go-to board for serious streamers and creatives.",
   },
   {
-    id: 10,
+    isDeleted: false,
     image: "https://i.ibb.co/hF2Wq6nr/k-10.jpg",
     title: "K10 Wireless Office Board",
     brand: "Logitech",
@@ -110,7 +110,7 @@ export const products = [
       "K10 is your productivity partner, featuring ultra-quiet switches and dual-device pairing. Perfect for hybrid work environments. It’s smart, silent, and made to last.",
   },
   {
-    id: 11,
+    isDeleted: false,
     image: "https://i.ibb.co/DfSt9BCY/k-11.jpg",
     title: "K11 Tactile RGB Pro",
     brand: "SteelSeries",
@@ -121,7 +121,7 @@ export const products = [
       "The SteelSeries K11 provides unmatched tactile feedback with every press. Dynamic PrismSync lighting brings your desk to life. Built to handle intense gaming sessions.",
   },
   {
-    id: 12,
+    isDeleted: false,
     image: "https://i.ibb.co/XfNnLDHv/k-12.jpg",
     title: "K12 Mini Mechanical",
     brand: "Razer",
@@ -132,7 +132,7 @@ export const products = [
       "Razer’s K12 offers a minimalist 60% form factor for clean setups. Green switches deliver iconic clicky feedback. Great for travel, eSports, or aesthetic builds.",
   },
   {
-    id: 13,
+    isDeleted: false,
     image: "https://i.ibb.co/qYTYdC5Z/k-13.jpg",
     title: "K13 RGB Hot-Swap Edition",
     brand: "Corsair",
@@ -143,7 +143,7 @@ export const products = [
       "Enjoy full switch modularity with the K13 Hot-Swap. Corsair’s iCUE support allows full RGB and macro programming. Built for creators and enthusiasts.",
   },
   {
-    id: 14,
+    isDeleted: false,
     image: "https://i.ibb.co/gxXpPtn/k-14.jpg",
     title: "K14 RGB Low Profile",
     brand: "A4Tech",
@@ -154,7 +154,7 @@ export const products = [
       "Low-profile switches give this keyboard a laptop-like feel. A4Tech’s K14 keeps things compact without losing tactile quality. A modern solution for home and office.",
   },
   {
-    id: 15,
+    isDeleted: false,
     image: "https://i.ibb.co/8DKKCmsq/k-15.jpg",
     title: "K15 Dual Mode Keyboard",
     brand: "Redragon",
@@ -165,7 +165,7 @@ export const products = [
       "K15 connects via USB or Bluetooth, making it highly versatile. It's ideal for multitaskers using phones, tablets, or PCs. The RGB modes are both fun and functional.",
   },
   {
-    id: 16,
+    isDeleted: false,
     image: "https://i.ibb.co/KxDq6WjH/k-16.jpg",
     title: "K16 Wireless TKL",
     brand: "Logitech",
@@ -176,7 +176,7 @@ export const products = [
       "Logitech’s K16 is a tenkeyless keyboard made for portability. Its wireless technology ensures no input delay. A strong choice for professionals and gamers alike.",
   },
   {
-    id: 17,
+    isDeleted: false,
     image: "https://i.ibb.co/hFtS4qDw/k-17.jpg",
     title: "K17 Hot-Swap 75%",
     brand: "Corsair",
@@ -187,7 +187,7 @@ export const products = [
       "Compact but powerful, the K17 is a 75% layout board with full functionality. Hot-swappable sockets allow switch customization. Corsair's premium feel seals the deal.",
   },
   {
-    id: 18,
+    isDeleted: false,
     image: "https://i.ibb.co/XZ5rxZgp/k-18.jpg",
     title: "K18 Tournament TKL",
     brand: "SteelSeries",
@@ -198,7 +198,7 @@ export const products = [
       "Dominate the competition with the TKL K18 built for precision. Its tactile switches and lightweight body make it tournament-ready. You’ll love the reactive RGB illumination.",
   },
   {
-    id: 19,
+    isDeleted: false,
     image: "https://i.ibb.co/NdZt6NGC/k-19.jpg",
     title: "K19 RGB Gaming Keyboard",
     brand: "Razer",
@@ -209,7 +209,7 @@ export const products = [
       "Razer’s signature build quality shines in the K19 model. With dynamic RGB, onboard profiles, and macro support—it’s game on. Enjoy satisfying actuation with every click.",
   },
   {
-    id: 20,
+    isDeleted: false,
     image: "https://i.ibb.co/v6XJgSn9/k-20.jpg",
     title: "K20 Optical Speed Board",
     brand: "ASUS ROG",
@@ -220,7 +220,7 @@ export const products = [
       "Blazing-fast optical switches power the K20. It’s built to deliver 100 million clicks with zero lag. Perfect for hardcore gamers who demand instant feedback.",
   },
   {
-    id: 21,
+    isDeleted: false,
     image: "https://i.ibb.co/Y4kL65Yv/k-21.jpg",
     title: "K21 Wireless Office Edition",
     brand: "HP",
@@ -231,7 +231,7 @@ export const products = [
       "Built for the modern workspace, the K21 ensures comfort and quiet operation. It supports multi-device pairing and long battery life. A professional solution for long hours.",
   },
   {
-    id: 22,
+    isDeleted: false,
     image: "https://i.ibb.co/Vp51ggpX/k-22.jpg",
     title: "K22 Compact RGB Pro",
     brand: "Corsair",
@@ -242,7 +242,7 @@ export const products = [
       "With a space-saving design and premium feel, the K22 stands out. Corsair’s vibrant RGB modes enhance your desktop aesthetic. Compact doesn’t mean compromise.",
   },
   {
-    id: 23,
+    isDeleted: false,
     image: "https://i.ibb.co/j9hh3Y73/k-23.jpg",
     title: "K23 Smart Macro Edition",
     brand: "SteelSeries",
@@ -253,7 +253,7 @@ export const products = [
       "Customize every key and lighting zone with the SteelSeries K23. Its software suite allows deep personalization. Built for advanced users who need more than basics.",
   },
   {
-    id: 24,
+    isDeleted: false,
     image: "https://i.ibb.co/p6rYcvrn/k-25.jpg",
     title: "K24 Mechanical Stealth Board",
     brand: "A4Tech",

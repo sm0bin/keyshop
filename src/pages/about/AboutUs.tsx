@@ -1,18 +1,14 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { Button } from "@/components/ui/button";
 import {
   Users,
   Award,
   Heart,
   Zap,
   Shield,
-  Target,
   Sparkles,
   Clock,
   Globe,
-  TrendingUp,
-  Star,
   Coffee,
 } from "lucide-react";
 
@@ -293,7 +289,7 @@ const AboutUs = () => {
           <div ref={textRef} className="space-y-6">
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto">
               At{" "}
-              <span className="text-white font-semibold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className=" font-semibold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                 MechaKeys
               </span>
               , we are passionate about crafting the ultimate typing and gaming
