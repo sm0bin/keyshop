@@ -1,12 +1,13 @@
+import type { DefinitionType } from "@reduxjs/toolkit/query";
+
 import {
-  DefinitionType,
   createApi,
   fetchBaseQuery,
   type BaseQueryApi,
   type BaseQueryFn,
   type FetchArgs,
 } from "@reduxjs/toolkit/query/react";
-import { logout, login } from "../features/auth/authSlice";
+import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 import type { RootState } from "../store";
 
@@ -49,7 +50,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     const data = await res.json();
     if (data?.data?.accessToken) {
       const user = (api.getState() as RootState).auth.user;
-      api.dispatch(login({ user, token: data?.data?.accessToken }));
+      api.dispatch(setUser({ user, token: data?.data?.accessToken }));
       result = await baseQuery(args, api, extraOptions);
     } else {
       api.dispatch(logout());
