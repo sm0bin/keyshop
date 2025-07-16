@@ -1,6 +1,8 @@
 import App from "@/App";
+import UserLayout from "@/layout/UserLayout";
 import AboutUs from "@/pages/about/AboutUs";
 import ContactUs from "@/pages/contact/ContactUs";
+import Dashboard from "@/pages/dashboard/Dashboard";
 import Home from "@/pages/home/Home";
 import Login from "@/pages/Login";
 import Products from "@/pages/products/Products";
@@ -36,8 +38,14 @@ const router = createBrowserRouter([
         element: <ContactUs />,
       },
       {
-        path: "/dashboard",
-        element: <div>Dashboard</div>,
+        path: "/user",
+        element: <UserLayout />,
+        children: [
+          {
+            path: "dashboard",
+            element: <Dashboard />,
+          },
+        ],
       },
     ],
   },

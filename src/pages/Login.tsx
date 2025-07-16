@@ -22,7 +22,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [form, setForm] = useState({
-    id: "146dc7d8-9cd2-4d98-baf1-ee7b149f2ee0",
+    email: "black0sheep000@gmail.com",
     password: "12345678",
   });
   const [login] = useLoginMutation();
@@ -44,6 +44,7 @@ const Login = () => {
       navigate(`/${user.role}/dashboard`);
     } catch (error) {
       toast.error("Login failed. Please try again.");
+      console.error("Login error:", error);
     } finally {
       toast.dismiss(toastId);
     }
@@ -64,13 +65,13 @@ const Login = () => {
         <form onSubmit={onSubmit}>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="id">ID</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
-                id="id"
-                name="id"
+                id="email"
+                name="email"
                 type="text"
-                placeholder="Your ID"
-                value={form.id}
+                placeholder="Your Email"
+                value={form.email}
                 onChange={onChange}
                 required
               />

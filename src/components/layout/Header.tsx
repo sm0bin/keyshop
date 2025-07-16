@@ -62,6 +62,15 @@ const Header = () => {
         {/* <Link to="/help">
           <CircleHelpIcon />
         </Link> */}
+
+        {
+          <Link
+            className="w-full px-4 py-2 rounded-lg border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
+            to="/login"
+          >
+            Login
+          </Link>
+        }
         <Link to="/account">
           <CircleUserRound size={32} strokeWidth="1" />
         </Link>
