@@ -1,6 +1,7 @@
 import App from "@/App";
 import UserLayout from "@/layout/UserLayout";
 import AboutUs from "@/pages/about/AboutUs";
+import Cart from "@/pages/cart/Cart";
 import ContactUs from "@/pages/contact/ContactUs";
 import Dashboard from "@/pages/dashboard/Dashboard";
 import Home from "@/pages/home/Home";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUs />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/user",
