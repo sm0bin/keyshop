@@ -7,42 +7,41 @@ import {
   ShoppingBag,
   ArrowLeft,
 } from "lucide-react";
-import {
-  useAddItemToCartMutation,
-  useClearCartMutation,
-  useGetCartQuery,
-  useRemoveItemFromCartMutation,
-  useUpdateCartItemMutation,
-} from "@/redux/features/cart/cartApi";
+// import {
+//   useAddItemToCartMutation,
+//   useClearCartMutation,
+//   useGetCartQuery,
+//   useRemoveItemFromCartMutation,
+//   useUpdateCartItemMutation,
+// } from "@/redux/features/cart/cartApi";
 import type { ICartItem } from "@/types";
 import {
   addItemToCart,
   clearCart,
   removeItemFromCart,
-  // updateCartItem,
+  updateCartItem,
 } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hook";
 
 const Cart = () => {
-  const { data, isLoading, error, isError, refetch } =
-    useGetCartQuery(undefined);
-  const [addItemToCart, { isLoading: isAdding }] = useAddItemToCartMutation();
-  const [updateCartItem, { isLoading: isUpdating }] =
-    useUpdateCartItemMutation();
+  // const { data, isLoading, error, isError, refetch } =
+  //   useGetCartQuery(undefined);
+  //   const [addItemToCart] = useAddItemToCartMutation();
+  //   const [updateCartItem, { isLoading: isUpdating }] =
+  //     useUpdateCartItemMutation();
   //   const [removeItemFromCart, { isLoading: isRemoving }] =
   //     useRemoveItemFromCartMutation();
   //   const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
 
-  // const cart = useAppSelector((state) => state.cart);
-  // const { items, totalAmount, totalItems } = cart;
-  // console.log("Cart items:", cart);
+  const cart = useAppSelector((state) => state.cart);
+  const { items, totalAmount, totalItems } = cart;
+
   // Fix data structure access - adjust based on your actual API response
   // console.log("Cart data:", data);
-  const { userId, items, totalItems, totalAmount } = data?.data || data || {};
+  // const { userId, items, totalItems, totalAmount } = data?.data || data || {};
 
   const handleQuantityChange = (productId, newQuantity) => {
-    // if (newQuantity < 1) return;
-    // updateCartItem({ productId, quantity: newQuantity });
+    if (newQuantity < 1) return;
     updateCartItem({ productId, quantity: newQuantity });
     // refetch();
   };
@@ -61,13 +60,13 @@ const Cart = () => {
     // refetch();
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-white"></div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+  //       <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-white"></div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 pt-20">
@@ -90,8 +89,24 @@ const Cart = () => {
           </p>
         </div>
 
+        {/* Error State */}
+        {error && (
+          <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6 mb-8">
+            <p className="text-red-300 text-center">
+              Error loading cart: {error.message || "Unknown error"}
+            </p>
+          </div>
+        )}
+
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          </div>
+        )}
+
         {/* Empty Cart State */}
-        {!items?.length && (
+        {!items?.length && !isLoading && (
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-12 text-center">
             <ShoppingBag className="w-24 h-24 text-white/30 mx-auto mb-6" />
             <h2 className="text-2xl font-semibold text-white mb-4">
@@ -199,7 +214,7 @@ const Cart = () => {
                           <button
                             onClick={() => handleRemoveItem(item.productId)}
                             className="p-3 hover:bg-red-500/20 rounded-full transition-colors text-red-300 hover:text-red-200 border border-red-500/20"
-                            // disabled={isRemoving}
+                            disabled={isRemoving}
                           >
                             <Trash2 className="w-5 h-5" />
                           </button>
@@ -256,9 +271,9 @@ const Cart = () => {
                   <button
                     onClick={() => handleClearCart(userId)}
                     className="w-full py-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-xl transition-colors font-semibold disabled:opacity-50 border border-red-500/20"
-                    // disabled={isClearing}
+                    disabled={isClearing}
                   >
-                    {/* {isClearing ? "Clearing..." : "Clear Cart"} */}
+                    {isClearing ? "Clearing..." : "Clear Cart"}
                   </button>
                 </div>
               </div>

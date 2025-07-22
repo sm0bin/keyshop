@@ -1,9 +1,11 @@
 import { Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+// import { useAddItemToCartMutation } from "@/redux/features/cart/cartApi";
+import { useAppDispatch } from "@/redux/hook";
+import { addItemToCart } from "@/redux/features/cart/cartSlice";
 
 interface ProductCardProps {
   product: {
+    _id: string;
     image: string;
     title: string;
     brand: string;
@@ -14,6 +16,17 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  // const [addItemToCart] = useAddItemToCartMutation();
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addItemToCart(product));
+    // addItemToCart({
+    //   productId: product._id,
+    //   quantity: 1,
+    //   price: product.price,
+    // });
+  };
   return (
     <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl text-white p-4 flex flex-col hover:scale-[1.02] transition duration-300">
       <img
@@ -37,7 +50,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <button className="w-full px-4 py-2 rounded-lg border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 transition">
           Show Details
         </button>
-        <button className="w-full px-4 py-2 rounded-lg border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold">
+        <button
+          onClick={handleAddToCart}
+          className="w-full px-4 py-2 rounded-lg border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
+        >
           Add to Cart
         </button>
         {/* <button className="w-full px-4 py-2 rounded-lg border border-primary/40 bg-orange-500/80 text-primary font-semibold backdrop-blur-md hover:bg-primary/30 hover:text-white transition">

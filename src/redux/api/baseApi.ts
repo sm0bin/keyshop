@@ -42,10 +42,13 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result?.error?.status === 401) {
     // toast.error(result?.error?.data?.message || "Unauthorized");
 
-    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/refresh`, {
-      method: "POST",
-      credentials: "include",
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/auth/refresh-token`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
     const data = await res.json();
     if (data?.data?.accessToken) {
@@ -63,6 +66,6 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["products"],
+  tagTypes: ["products", "cart"],
   endpoints: () => ({}),
 });

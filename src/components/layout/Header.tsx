@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CircleUserRound, ShoppingBasket } from "lucide-react";
+import { useAppSelector } from "@/redux/hook";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -13,6 +14,7 @@ const navLinks = [
 const Header = () => {
   const [lastScrollTop, setLastScrollTop] = React.useState(0);
   const [navbarStyle, setNavbarStyle] = React.useState("translate-y-0");
+  const totalItems = useAppSelector((state) => state.cart.totalItems);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -56,8 +58,12 @@ const Header = () => {
       </div>
 
       <div className="flex items-center gap-6 text-white">
-        <Link to="/cart">
+        <Link to="/cart" className="relative">
           <ShoppingBasket size={32} strokeWidth="1" />
+          <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold rounded-full px-1.5">
+            {/* Replace with actual cart item count */}
+            {totalItems > 0 ? totalItems : 0}
+          </span>
         </Link>
         {/* <Link to="/help">
           <CircleHelpIcon />

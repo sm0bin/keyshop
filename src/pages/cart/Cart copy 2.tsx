@@ -7,58 +7,83 @@ import {
   ShoppingBag,
   ArrowLeft,
 } from "lucide-react";
-import {
-  useAddItemToCartMutation,
-  useClearCartMutation,
-  useGetCartQuery,
-  useRemoveItemFromCartMutation,
-  useUpdateCartItemMutation,
-} from "@/redux/features/cart/cartApi";
-import type { ICartItem } from "@/types";
-import {
-  addItemToCart,
-  clearCart,
-  removeItemFromCart,
-  // updateCartItem,
-} from "@/redux/features/cart/cartSlice";
-import { useAppSelector } from "@/redux/hook";
+
+// Mock cart item type
+interface ICartItem {
+  productId: string;
+  quantity: number;
+  product: {
+    id: string;
+    title: string;
+    price: number;
+    image: string;
+  };
+}
 
 const Cart = () => {
-  const { data, isLoading, error, isError, refetch } =
-    useGetCartQuery(undefined);
-  const [addItemToCart, { isLoading: isAdding }] = useAddItemToCartMutation();
-  const [updateCartItem, { isLoading: isUpdating }] =
-    useUpdateCartItemMutation();
-  //   const [removeItemFromCart, { isLoading: isRemoving }] =
-  //     useRemoveItemFromCartMutation();
-  //   const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
+  // Mock data for demonstration
+  const [cartItems, setCartItems] = useState<ICartItem[]>([
+    {
+      productId: "1",
+      quantity: 2,
+      product: {
+        id: "1",
+        title: "Wireless Bluetooth Headphones with Noise Cancellation",
+        price: 199.99,
+        image:
+          "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop",
+      },
+    },
+    {
+      productId: "2",
+      quantity: 1,
+      product: {
+        id: "2",
+        title: "Smart Watch with Fitness Tracking",
+        price: 299.99,
+        image:
+          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop",
+      },
+    },
+    {
+      productId: "3",
+      quantity: 3,
+      product: {
+        id: "3",
+        title: "USB-C Fast Charging Cable",
+        price: 29.99,
+        image:
+          "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=300&h=300&fit=crop",
+      },
+    },
+  ]);
 
-  // const cart = useAppSelector((state) => state.cart);
-  // const { items, totalAmount, totalItems } = cart;
-  // console.log("Cart items:", cart);
-  // Fix data structure access - adjust based on your actual API response
-  // console.log("Cart data:", data);
-  const { userId, items, totalItems, totalAmount } = data?.data || data || {};
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleQuantityChange = (productId, newQuantity) => {
-    // if (newQuantity < 1) return;
-    // updateCartItem({ productId, quantity: newQuantity });
-    updateCartItem({ productId, quantity: newQuantity });
-    // refetch();
+  // Calculate totals
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalAmount = cartItems.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0
+  );
+
+  const handleQuantityChange = (productId: string, newQuantity: number) => {
+    if (newQuantity < 1) return;
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.productId === productId ? { ...item, quantity: newQuantity } : item
+      )
+    );
   };
 
-  const handleAddItem = (id: string) => {
-    addItemToCart(id);
+  const handleRemoveItem = (productId: string) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.productId !== productId)
+    );
   };
 
-  const handleRemoveItem = (id: string) => {
-    removeItemFromCart(id);
-    // refetch();
-  };
-
-  const handleClearCart = (id: string) => {
-    clearCart(id);
-    // refetch();
+  const handleClearCart = () => {
+    setCartItems([]);
   };
 
   if (isLoading) {
@@ -70,7 +95,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 pt-20">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
@@ -91,7 +116,7 @@ const Cart = () => {
         </div>
 
         {/* Empty Cart State */}
-        {!items?.length && (
+        {!cartItems?.length && !isLoading && (
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-12 text-center">
             <ShoppingBag className="w-24 h-24 text-white/30 mx-auto mb-6" />
             <h2 className="text-2xl font-semibold text-white mb-4">
@@ -107,11 +132,11 @@ const Cart = () => {
         )}
 
         {/* Cart Items */}
-        {items?.length > 0 && (
+        {cartItems?.length > 0 && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Items List */}
             <div className="lg:col-span-2 space-y-4">
-              {items.map((item: ICartItem) => (
+              {cartItems.map((item: ICartItem) => (
                 <div
                   key={item.productId}
                   className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg"
@@ -152,27 +177,13 @@ const Cart = () => {
                                 )
                               }
                               className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors disabled:opacity-50"
-                              disabled={item.quantity <= 1 || isUpdating}
+                              disabled={item.quantity <= 1}
                             >
                               <Minus className="w-4 h-4 text-white" />
                             </button>
-                            <input
-                              type="number"
-                              value={item.quantity}
-                              onChange={(e) => {
-                                const newQuantity =
-                                  parseInt(e.target.value) || 1;
-                                if (newQuantity > 0) {
-                                  handleQuantityChange(
-                                    item.productId,
-                                    newQuantity
-                                  );
-                                }
-                              }}
-                              min="1"
-                              className="text-white font-bold text-lg min-w-[3rem] text-center bg-white/10 rounded-lg py-2 px-4 border border-white/20 focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
-                              disabled={isUpdating}
-                            />
+                            <span className="text-white font-bold text-lg min-w-[3rem] text-center bg-white/10 rounded-lg py-2 px-4">
+                              {item.quantity}
+                            </span>
                             <button
                               onClick={() =>
                                 handleQuantityChange(
@@ -180,8 +191,7 @@ const Cart = () => {
                                   item.quantity + 1
                                 )
                               }
-                              className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors disabled:opacity-50"
-                              disabled={isUpdating}
+                              className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
                             >
                               <Plus className="w-4 h-4 text-white" />
                             </button>
@@ -190,16 +200,11 @@ const Cart = () => {
 
                         <div className="flex items-center gap-4">
                           <p className="text-white font-bold text-xl">
-                            $
-                            {(
-                              (item.product?.price || item.price) *
-                              item.quantity
-                            ).toFixed(2)}
+                            ${(item.product.price * item.quantity).toFixed(2)}
                           </p>
                           <button
                             onClick={() => handleRemoveItem(item.productId)}
                             className="p-3 hover:bg-red-500/20 rounded-full transition-colors text-red-300 hover:text-red-200 border border-red-500/20"
-                            // disabled={isRemoving}
                           >
                             <Trash2 className="w-5 h-5" />
                           </button>
@@ -222,7 +227,7 @@ const Cart = () => {
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between items-center text-white/70">
                     <span>Items ({totalItems}):</span>
-                    <span>${totalAmount?.toFixed(2)}</span>
+                    <span>${totalAmount.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between items-center text-white/70">
                     <span>Shipping:</span>
@@ -238,7 +243,7 @@ const Cart = () => {
                         Total:
                       </span>
                       <span className="text-2xl font-bold text-white">
-                        ${totalAmount?.toFixed(2)}
+                        ${totalAmount.toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -254,11 +259,10 @@ const Cart = () => {
                   </button>
 
                   <button
-                    onClick={() => handleClearCart(userId)}
-                    className="w-full py-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-xl transition-colors font-semibold disabled:opacity-50 border border-red-500/20"
-                    // disabled={isClearing}
+                    onClick={handleClearCart}
+                    className="w-full py-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-xl transition-colors font-semibold border border-red-500/20"
                   >
-                    {/* {isClearing ? "Clearing..." : "Clear Cart"} */}
+                    Clear Cart
                   </button>
                 </div>
               </div>
