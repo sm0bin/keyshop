@@ -8,6 +8,7 @@ import Home from "@/pages/home/Home";
 import Login from "@/pages/Login";
 import Products from "@/pages/products/Products";
 import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -40,11 +41,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/user",
-        element: <UserLayout />,
+        element: (
+          <ProtectedRoute>
+            <UserLayout />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: "dashboard",

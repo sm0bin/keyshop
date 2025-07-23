@@ -15,23 +15,24 @@ import {
   useUpdateCartItemMutation,
 } from "@/redux/features/cart/cartApi";
 import type { ICartItem } from "@/types";
-import {
-  addItemToCart,
-  clearCart,
-  removeItemFromCart,
-  // updateCartItem,
-} from "@/redux/features/cart/cartSlice";
+// import {
+//   addItemToCart,
+//   clearCart,
+//   removeItemFromCart,
+//   // updateCartItem,
+// } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hook";
 
 const Cart = () => {
+  const [quantity, setQuantity] = useState(1);
   const { data, isLoading, error, isError, refetch } =
     useGetCartQuery(undefined);
   const [addItemToCart, { isLoading: isAdding }] = useAddItemToCartMutation();
   const [updateCartItem, { isLoading: isUpdating }] =
     useUpdateCartItemMutation();
-  //   const [removeItemFromCart, { isLoading: isRemoving }] =
-  //     useRemoveItemFromCartMutation();
-  //   const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
+  const [removeItemFromCart, { isLoading: isRemoving }] =
+    useRemoveItemFromCartMutation();
+  const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
 
   // const cart = useAppSelector((state) => state.cart);
   // const { items, totalAmount, totalItems } = cart;
@@ -199,7 +200,7 @@ const Cart = () => {
                           <button
                             onClick={() => handleRemoveItem(item.productId)}
                             className="p-3 hover:bg-red-500/20 rounded-full transition-colors text-red-300 hover:text-red-200 border border-red-500/20"
-                            // disabled={isRemoving}
+                            disabled={isRemoving}
                           >
                             <Trash2 className="w-5 h-5" />
                           </button>
@@ -256,9 +257,9 @@ const Cart = () => {
                   <button
                     onClick={() => handleClearCart(userId)}
                     className="w-full py-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-xl transition-colors font-semibold disabled:opacity-50 border border-red-500/20"
-                    // disabled={isClearing}
+                    disabled={isClearing}
                   >
-                    {/* {isClearing ? "Clearing..." : "Clear Cart"} */}
+                    {isClearing ? "Clearing..." : "Clear Cart"}
                   </button>
                 </div>
               </div>
