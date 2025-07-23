@@ -1,4 +1,4 @@
-import Login from "./pages/Login";
+import Login from "./pages/auth/Login";
 import Header from "./components/layout/Header";
 import Home from "./pages/home/Home";
 import { Outlet } from "react-router-dom";
