@@ -34,7 +34,7 @@ export default function Login() {
         navigate(`/${user.role}/dashboard`);
       })
       .catch((error) => {
-        // Handle error, e.g., show error message
+        toast.error("Login failed. Please try again.");
         console.error("Login failed:", error);
       });
   };

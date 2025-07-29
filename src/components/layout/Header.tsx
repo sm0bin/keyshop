@@ -1,20 +1,42 @@
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { CircleUserRound, ShoppingBasket } from "lucide-react";
-import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { logout, selectUser } from "@/redux/features/auth/authSlice";
+import { useGetCartQuery } from "@/redux/features/cart/cartApi";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import type { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 
-const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "Products", path: "/products" },
-  { label: "About Us", path: "/about" },
-  { label: "Contact Us", path: "/contact" },
-  { label: "Dashboard", path: "/dashboard" },
-];
+type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 const Header = () => {
   const [lastScrollTop, setLastScrollTop] = React.useState(0);
   const [navbarStyle, setNavbarStyle] = React.useState("translate-y-0");
   const totalItems = useAppSelector((state) => state.cart.totalItems);
+  const user = useAppSelector(selectUser);
+  const isLoggedIn = user && Object.keys(user).length > 0;
+  const { data, isLoading, error, isError, refetch } =
+    useGetCartQuery(undefined);
+  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
+  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
+  const [showPanel, setShowPanel] = React.useState<Checked>(false);
+  const dispatch = useAppDispatch();
+
+  const navLinks = [
+    { label: "Home", path: "/" },
+    { label: "Products", path: "/products" },
+    { label: "About Us", path: "/about" },
+    { label: "Contact Us", path: "/contact" },
+    { label: "Dashboard", path: `/${user?.role}/dashboard` },
+  ];
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -62,24 +84,59 @@ const Header = () => {
           <ShoppingBasket size={32} strokeWidth="1" />
           <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold rounded-full px-1.5">
             {/* Replace with actual cart item count */}
-            {totalItems > 0 ? totalItems : 0}
+            {isLoading ? "0" : data?.data?.totalItems || 0}
+            {/* {totalItems > 0 ? totalItems : 0} */}
           </span>
         </Link>
         {/* <Link to="/help">
           <CircleHelpIcon />
         </Link> */}
 
-        {
+        {isLoggedIn ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center gap-2 cursor-pointer">
+                <CircleUserRound size={32} strokeWidth="1" />
+                {user.role}
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuCheckboxItem
+                checked={showStatusBar}
+                onCheckedChange={setShowStatusBar}
+              >
+                {user.id}
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={showActivityBar}
+                onCheckedChange={setShowActivityBar}
+                disabled
+              >
+                Activity Bar
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={showPanel}
+                onCheckedChange={setShowPanel}
+                onClick={() => dispatch(logout())}
+              >
+                Logout
+              </DropdownMenuCheckboxItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          // <Link className="flex gap-2 items-center" to="/account">
+          //   <CircleUserRound size={32} strokeWidth="1" />
+          //   {user.role}
+          // </Link>
           <Link
             className="w-full px-4 py-2 rounded-lg border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
             to="/login"
           >
             Login
           </Link>
-        }
-        <Link to="/account">
-          <CircleUserRound size={32} strokeWidth="1" />
-        </Link>
+        )}
       </div>
     </nav>
   );

@@ -10,6 +10,8 @@ import Products from "@/pages/products/Products";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Signup from "@/pages/auth/Signup";
+import ProductsTable from "@/pages/dashboard/components/ProductsTable";
+import AddProduct from "@/pages/dashboard/components/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,16 @@ const router = createBrowserRouter([
           {
             path: "dashboard",
             element: <Dashboard />,
+            children: [
+              {
+                path: "products",
+                element: <ProductsTable />,
+              },
+              {
+                path: "add-products",
+                element: <AddProduct />,
+              },
+            ],
           },
         ],
       },

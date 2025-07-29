@@ -21,9 +21,26 @@ export default function Signup() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    if (!form.name || !form.email || !form.password) {
+      toast.error("All fields are required.");
+      return false;
+    } else if (form.password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return false;
+    } else if (form.name.length < 2) {
+      toast.error("Name must be at least 2 characters long.");
+      return false;
+    }
+
+    return true;
+  };
+
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // dispatch(signupUser(form));
+    if (!validateForm()) return;
+
     createUser(form)
       .unwrap()
       .then((response) => {
@@ -34,6 +51,7 @@ export default function Signup() {
       })
       .catch((error) => {
         // Handle error, e.g., show error message
+        toast.error(error.data.message || "Failed to create user.");
         console.error("Error creating user:", error);
       });
   };

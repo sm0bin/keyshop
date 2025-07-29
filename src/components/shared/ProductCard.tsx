@@ -1,7 +1,9 @@
 import { Star } from "lucide-react";
 // import { useAddItemToCartMutation } from "@/redux/features/cart/cartApi";
 import { useAppDispatch } from "@/redux/hook";
-import { addItemToCart } from "@/redux/features/cart/cartSlice";
+// import { addItemToCart } from "@/redux/features/cart/cartSlice";
+import { useAddItemToCartMutation } from "@/redux/features/cart/cartApi";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   product: {
@@ -16,16 +18,29 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const [addItemToCart, { isLoading: isAdding }] = useAddItemToCartMutation();
   // const [addItemToCart] = useAddItemToCartMutation();
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addItemToCart(product));
-    // addItemToCart({
-    //   productId: product._id,
-    //   quantity: 1,
-    //   price: product.price,
-    // });
+    addItemToCart({
+      productId: product._id,
+      title: product.title,
+      image: product.image,
+      price: product.price,
+      quantity: 1, // Default to 1 for simplicity
+    })
+      .unwrap()
+      .then((response) => {
+        console.log("Item added to cart:", response);
+        toast.success("Item added to cart successfully!");
+        // Optionally dispatch an action or show a success message
+      })
+      .catch((error) => {
+        console.error("Failed to add item to cart:", error);
+        toast.error("Failed to add item to cart.");
+        // Optionally show an error message
+      });
   };
   return (
     <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl text-white p-4 flex flex-col hover:scale-[1.02] transition duration-300">
