@@ -45,7 +45,7 @@ const AddProduct = () => {
       })
       .catch((error) => {
         console.error("Error adding product:", error);
-        toast.error("Failed to add product.");
+        toast.error(error.data?.message || "Failed to add product.");
       });
   };
   return (
@@ -59,6 +59,7 @@ const AddProduct = () => {
             id="image"
             name="image"
             required
+            value={formData.image}
             onChange={handleChange}
           />
         </div>
@@ -69,6 +70,7 @@ const AddProduct = () => {
             id="title"
             name="title"
             required
+            value={formData.title}
             onChange={handleChange}
           />
         </div>
@@ -79,6 +81,7 @@ const AddProduct = () => {
             id="brand"
             name="brand"
             required
+            value={formData.brand}
             onChange={handleChange}
           />
         </div>
@@ -89,6 +92,7 @@ const AddProduct = () => {
             id="quantity"
             name="quantity"
             required
+            value={formData.quantity}
             onChange={handleChange}
           />
         </div>
@@ -99,6 +103,7 @@ const AddProduct = () => {
             id="price"
             name="price"
             required
+            value={formData.price}
             onChange={handleChange}
           />
         </div>
@@ -109,6 +114,7 @@ const AddProduct = () => {
             id="rating"
             name="rating"
             required
+            value={formData.rating}
             onChange={handleChange}
           />
         </div>
@@ -118,6 +124,7 @@ const AddProduct = () => {
             id="description"
             name="description"
             required
+            value={formData.description}
             onChange={handleChange}
           />
         </div>

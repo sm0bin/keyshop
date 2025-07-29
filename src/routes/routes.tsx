@@ -55,6 +55,30 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/admin",
+        element: (
+          <ProtectedRoute>
+            <UserLayout />
+          </ProtectedRoute>
+        ),
+        children: [
+          {
+            path: "dashboard",
+            element: <Dashboard />,
+            children: [
+              {
+                path: "",
+                element: <ProductsTable />,
+              },
+              {
+                path: "add-products",
+                element: <AddProduct />,
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: "/user",
         element: (
           <ProtectedRoute>
