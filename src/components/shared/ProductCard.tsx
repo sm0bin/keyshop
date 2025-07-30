@@ -4,6 +4,8 @@ import { useAppDispatch } from "@/redux/hook";
 // import { addItemToCart } from "@/redux/features/cart/cartSlice";
 import { useAddItemToCartMutation } from "@/redux/features/cart/cartApi";
 import { toast } from "sonner";
+import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
   product: {
@@ -61,16 +63,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <span>{product.rating}</span>
         </div>
       </div>
-      <div className="flex justify-between gap-2 mt-auto">
-        <button className="w-full px-4 py-2 rounded-lg border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 transition">
-          Show Details
-        </button>
-        <button
-          onClick={handleAddToCart}
-          className="w-full px-4 py-2 rounded-lg border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
-        >
+      <div className="grid grid-cols-2 gap-2">
+        <Link className="w-full" to={`/products/${product._id}`}>
+          <Button className="w-full" variant={"secondary"}>
+            Show Details
+          </Button>
+        </Link>
+        <Button onClick={handleAddToCart} className="">
           Add to Cart
-        </button>
+        </Button>
         {/* <button className="w-full px-4 py-2 rounded-lg border border-primary/40 bg-orange-500/80 text-primary font-semibold backdrop-blur-md hover:bg-primary/30 hover:text-white transition">
           Add to Cart
         </button> */}

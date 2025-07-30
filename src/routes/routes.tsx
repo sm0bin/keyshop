@@ -12,6 +12,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Signup from "@/pages/auth/Signup";
 import ProductsTable from "@/pages/dashboard/components/ProductsTable";
 import AddProduct from "@/pages/dashboard/components/AddProduct";
+import ProductDetails from "@/pages/productDetails/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails />,
       },
       {
         path: "/about",

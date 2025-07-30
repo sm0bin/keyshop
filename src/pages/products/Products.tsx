@@ -23,7 +23,7 @@ const Products = () => {
   }
 
   return (
-    <section className="py-16 px-4 md:px-8 lg:px-20 bg-gradient-to-br from-black via-gray-900 to-neutral-900 min-h-screen">
+    <section className="pt-20 px-4 md:px-8 lg:px-20 bg-gradient-to-br from-black via-gray-900 to-neutral-900 min-h-screen">
       <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
         Mechanical Keyboards
       </h2>

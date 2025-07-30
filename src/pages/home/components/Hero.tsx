@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { heroSlides } from "@/utils/data/data";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -80,9 +81,9 @@ const Hero = () => {
                 {/* Glass button */}
                 <Link
                   to="/products"
-                  className="px-6 py-2 rounded-full border border-white/30 text-white backdrop-blur-md bg-white/10 hover:bg-white/20 transition"
+                  // className="px-6 py-2 rounded-full border border-white/30 text-white backdrop-blur-md bg-white/10 hover:bg-white/20 transition"
                 >
-                  Explore Now
+                  <Button>Explore Now</Button>
                 </Link>
               </div>
             </div>
