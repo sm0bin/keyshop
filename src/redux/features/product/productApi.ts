@@ -1,8 +1,10 @@
 import { baseApi } from "../../api/baseApi";
 
-interface TQueryParams {
-  name?: string;
-  value?: string;
+interface TProductQueryParams {
+  search?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  sortBy?: string;
 }
 
 const productApi = baseApi.injectEndpoints({
@@ -10,20 +12,24 @@ const productApi = baseApi.injectEndpoints({
     getProducts: builder.query({
       query: (args) => {
         console.log("Fetching products with args:", args);
-        const params = new URLSearchParams();
 
-        if (args) {
-          Object.entries(args).forEach(([key, value]) => {
-            if (value) {
-              params.append(key, value as string);
-            }
-          });
-        }
-        console.log("Query parameters:", params.toString());
+        // Filter out undefined/null values and build params
+        const params = args
+          ? Object.fromEntries(
+              Object.entries(args)
+                .filter(
+                  ([_, value]) =>
+                    value !== undefined && value !== null && value !== ""
+                )
+                .map(([key, value]) => [key, String(value)])
+            )
+          : {};
+
+        console.log("Query parameters:", params);
+
         return {
           url: "/products",
-          method: "GET",
-          params: params,
+          params,
         };
       },
       providesTags: ["product"],
