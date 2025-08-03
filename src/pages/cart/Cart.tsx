@@ -22,6 +22,7 @@ import type { ICartItem } from "@/types";
 //   // updateCartItem,
 // } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hook";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
@@ -246,9 +247,11 @@ const Cart = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <button className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Proceed to Checkout
-                  </button>
+                  <Link to="/checkout">
+                    <button className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                      Proceed to Checkout
+                    </button>
+                  </Link>
 
                   <button className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl font-semibold transition-colors border border-white/20">
                     Continue Shopping

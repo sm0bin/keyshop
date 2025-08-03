@@ -13,6 +13,9 @@ import Signup from "@/pages/auth/Signup";
 import ProductsTable from "@/pages/dashboard/components/ProductsTable";
 import AddProduct from "@/pages/dashboard/components/AddProduct";
 import ProductDetails from "@/pages/productDetails/ProductDetails";
+import Checkout from "@/pages/checkout/Checkout";
+import Return from "@/pages/stripe/Return";
+import CheckoutForm from "@/pages/stripe/CheckoutForm";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +59,30 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Cart />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <ProtectedRoute>
+            <Checkout />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/checkout-form",
+        element: (
+          <ProtectedRoute>
+            <CheckoutForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/return",
+        element: (
+          <ProtectedRoute>
+            <Return />
           </ProtectedRoute>
         ),
       },

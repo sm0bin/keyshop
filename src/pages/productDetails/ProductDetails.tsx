@@ -41,11 +41,8 @@ const ProductDetails = () => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
   const id = useParams().id;
-  const {
-    data: { data: product },
-    isLoading,
-    error,
-  } = useGetProductQuery(id);
+  const { data, isLoading, error } = useGetProductQuery(id);
+
   if (!id) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 flex items-center justify-center">
@@ -57,13 +54,6 @@ const ProductDetails = () => {
       </div>
     );
   }
-
-  if (isLoading)
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 flex items-center justify-center">
-        <div className="animate-pulse text-white text-xl">Loading...</div>
-      </div>
-    );
 
   if (isLoading) {
     return (
@@ -84,6 +74,8 @@ const ProductDetails = () => {
       </div>
     );
   }
+
+  const product = data?.data;
 
   const handleQuantityChange = (change) => {
     setQuantity((prev) =>
