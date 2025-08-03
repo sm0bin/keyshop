@@ -62,18 +62,17 @@ const shopFeatures = [
 
 const ShopFeatures = () => {
   return (
-    <section className=" py-12 px-4">
-      <div className="max-w-6xl mx-auto text-center mb-10">
+    <section className="">
+      <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-white">
-          Why Shop With Us?
+          Shop Features
         </h2>
         <p className="text-gray-300 mt-2">
-          We’re committed to making your shopping experience smooth and
-          reliable.
+          Discover a wide range of features to enhance your gaming experience.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {shopFeatures.map((feature) => (
           <div
             key={feature.id}

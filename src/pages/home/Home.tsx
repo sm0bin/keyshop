@@ -5,19 +5,21 @@ import ShopFeatures from "./components/ShopFeatures";
 import Testimonials from "./components/Testimonials";
 import WhyChooseMechanical from "./components/WhyChooseMechanical";
 import CustomizableOptions from "./components/CustomizableOptions";
+import FeaturedProducts from "./components/FeaturedProducts";
 
 const Home = () => {
   return (
     <div className="pt-16">
       <Hero />
-      <ShopFeatures />
-      <div className="w-full bg-slate-300 h-40 flex justify-center items-center rounded-md text-2xl font-bold">
-        <h1>Featured Products</h1>
+
+      <div className="space-y-28 my-28 max-w-7xl mx-4 md:mx-8 lg:mx-auto">
+        <ShopFeatures />
+        <FeaturedProducts />
+        <KeyboardBrands />
+        <Testimonials />
+        <WhyChooseMechanical />
+        <CustomizableOptions />
       </div>
-      <KeyboardBrands />
-      <Testimonials />
-      <WhyChooseMechanical />
-      <CustomizableOptions />
       <Footer />
     </div>
   );

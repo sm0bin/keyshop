@@ -20,16 +20,16 @@ const navLinks = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className="max-w-7xl mx-auto text-white pt-12 pb-6 px-4">
+    <footer className="max-w-7xl mx-4 md:mx-8 lg:mx-auto pb-6">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 backdrop-blur-md bg-white/5 rounded-2xl p-8 border border-white/10 shadow-md">
         {/* Logo + Description */}
         <div>
-          <h2 className="text-2xl font-bold mb-2">MechaKeys</h2>
+          <h2 className="text-2xl font-bold mb-2 text-white">MechaKeys</h2>
           <p className="text-gray-300 mb-4">
             Explore premium mechanical keyboards and accessories tailored for
             gamers, coders, and creators across Bangladesh.
           </p>
-          <div className="flex space-x-4 mt-4">
+          <div className="flex space-x-4 mt-4 text-white">
             <a href="#" target="_blank" rel="noreferrer">
               <Facebook className="w-5 h-5 hover:text-blue-400 transition" />
             </a>

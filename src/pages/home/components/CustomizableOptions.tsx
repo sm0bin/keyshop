@@ -96,13 +96,12 @@ const CustomizableOptions: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-white mb-10 text-center">
-          Customizable Options
-        </h2>
+    <div className="">
+      <h2 className="text-4xl font-bold text-white mb-10 text-center">
+        Customizable Options
+      </h2>
 
-        {/* <div className="grid grid-cols-4 auto-rows-[256px] gap-4">
+      {/* <div className="grid grid-cols-4 auto-rows-[256px] gap-4">
           <div className="bg-white col-span-2">a</div>
           <div className="bg-white row-span-2">a</div>
           <div className="bg-white">a</div>
@@ -113,28 +112,25 @@ const CustomizableOptions: React.FC = () => {
           <div className="bg-white col-span-2">a</div>
         </div> */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-4">
-          {options.map((item, i) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-4">
+        {options.map((item, i) => (
+          <div
+            key={item.id}
+            ref={(el) => (cardsRef.current[i] = el)}
+            className={`relative rounded-2xl overflow-hidden group col-span-${item.colSpan} row-span-${item.rowSpan} shadow-lg`}
+          >
             <div
-              key={item.id}
-              ref={(el) => (cardsRef.current[i] = el)}
-              className={`relative rounded-2xl overflow-hidden group col-span-${item.colSpan} row-span-${item.rowSpan} shadow-lg`}
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 scale-100 group-hover:scale-150"
-                style={{ backgroundImage: `url(${item.img})` }}
-              ></div>
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all backdrop-blur-[2px] p-4 flex flex-col justify-end">
-                <h3 className="text-white text-xl font-semibold">
-                  {item.title}
-                </h3>
-                <p className="text-gray-300 text-sm">{item.desc}</p>
-              </div>
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 scale-100 group-hover:scale-150"
+              style={{ backgroundImage: `url(${item.img})` }}
+            ></div>
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all backdrop-blur-[2px] p-4 flex flex-col justify-end">
+              <h3 className="text-white text-xl font-semibold">{item.title}</h3>
+              <p className="text-gray-300 text-sm">{item.desc}</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 
