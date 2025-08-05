@@ -24,7 +24,7 @@ const FeaturedProducts = () => {
   const products = data?.data || [];
 
   return (
-    <div className="">
+    <section className="">
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-bold text-white">
           Featured Products
@@ -42,7 +42,7 @@ const FeaturedProducts = () => {
       >
         View All
       </Link>
-    </div>
+    </section>
   );
 };
 

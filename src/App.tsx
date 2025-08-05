@@ -3,7 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 function App() {
   const location = useLocation();
-  const hideNavbarRoutes = ["/dashboard"];
+  const hideNavbarRoutes = ["/test"];
 
   const showNavbar = !hideNavbarRoutes.some((path) =>
     location.pathname.includes(path)

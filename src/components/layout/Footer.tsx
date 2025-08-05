@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
 
         {/* Navigation */}
         <div>
-          <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
+          <h3 className="text-xl font-semibold mb-4 text-white">Quick Links</h3>
           <ul className="space-y-2">
             {navLinks.map((link) => (
               <li key={link.path}>
@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
 
         {/* Contact Info */}
         <div>
-          <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
+          <h3 className="text-xl font-semibold mb-4 text-white">Contact Us</h3>
           <ul className="space-y-3 text-gray-300 text-sm">
             <li className="flex items-center gap-2">
               <Mail className="w-4 h-4" /> support@mechakeys.com

@@ -96,11 +96,15 @@ const CustomizableOptions: React.FC = () => {
   }, []);
 
   return (
-    <div className="">
-      <h2 className="text-4xl font-bold text-white mb-10 text-center">
-        Customizable Options
-      </h2>
-
+    <section className="">
+      <div className="text-center mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
+          Customizable Options
+        </h2>
+        <p className="text-gray-300 mt-2">
+          Customize your keyboard to your liking
+        </p>
+      </div>
       {/* <div className="grid grid-cols-4 auto-rows-[256px] gap-4">
           <div className="bg-white col-span-2">a</div>
           <div className="bg-white row-span-2">a</div>
@@ -130,7 +134,7 @@ const CustomizableOptions: React.FC = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

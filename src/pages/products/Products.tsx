@@ -2,15 +2,18 @@ import { useState, useEffect } from "react";
 import ProductCard from "@/components/shared/ProductCard";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 import { Button } from "@/components/ui/button";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Products = () => {
   // Filter and search states
   const [searchTerm, setSearchTerm] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [sortBy, setSortBy] = useState(""); // "", "price-low", "price-high"
-
-  // Debounced search to avoid too many API calls
+  const [sortBy, setSortBy] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
   // Debounce search term
@@ -21,6 +24,21 @@ const Products = () => {
 
     return () => clearTimeout(timer);
   }, [searchTerm]);
+
+  useEffect(() => {
+    gsap.from(".product-card", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2, // Stagger for dynamic cards
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".products-grid",
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
+  }, [products]);
 
   // Build query parameters
   const queryParams = {
@@ -38,8 +56,6 @@ const Products = () => {
 
   console.log("Products Query Params:", queryParams);
   console.log("Products:", data);
-
-  const products = data?.data || [];
 
   // Clear all filters
   const clearFilters = () => {

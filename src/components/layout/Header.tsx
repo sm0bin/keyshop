@@ -14,20 +14,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
+import { useEffect, useState } from "react";
+import { useGetProfileQuery } from "@/redux/features/auth/authApi";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 const Header = () => {
   const [lastScrollTop, setLastScrollTop] = React.useState(0);
   const [navbarStyle, setNavbarStyle] = React.useState("translate-y-0");
-  const totalItems = useAppSelector((state) => state.cart.totalItems);
   const user = useAppSelector(selectUser);
   const isLoggedIn = user && Object.keys(user).length > 0;
-  const { data, isLoading, error, isError, refetch } =
-    useGetCartQuery(undefined);
-  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
-  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
-  const [showPanel, setShowPanel] = React.useState<Checked>(false);
+  const {
+    data,
+    isLoading: cartLoading,
+    error: cartError,
+  } = useGetCartQuery(undefined);
+  // RTK Query hook to fetch profile data
+  const { data: profile, isLoading: profileLoading } =
+    useGetProfileQuery(undefined);
+
+  const profileData = profile?.data || null;
+  const [showStatusBar, setShowStatusBar] = useState(true);
+  const [showPanel, setShowPanel] = useState(false);
   const dispatch = useAppDispatch();
 
   const navLinks = [
@@ -38,7 +46,7 @@ const Header = () => {
     { label: "Dashboard", path: `/${user?.role}/dashboard` },
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       const scrollTop = document.documentElement.scrollTop;
 
@@ -84,7 +92,7 @@ const Header = () => {
           <ShoppingBasket size={32} strokeWidth="1" />
           <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold rounded-full px-1.5">
             {/* Replace with actual cart item count */}
-            {isLoading ? "0" : data?.data?.totalItems || 0}
+            {cartLoading ? "0" : data?.data?.totalItems || 0}
             {/* {totalItems > 0 ? totalItems : 0} */}
           </span>
         </Link>
@@ -97,24 +105,19 @@ const Header = () => {
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-2 cursor-pointer">
                 <CircleUserRound size={32} strokeWidth="1" />
-                {user.role}
+                {profileLoading ? "Loading..." : profileData?.name}
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+              <DropdownMenuLabel>
+                {`${profileData?.name} (${profileData?.role})`}
+              </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuCheckboxItem
                 checked={showStatusBar}
                 onCheckedChange={setShowStatusBar}
               >
-                {user.id}
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={showActivityBar}
-                onCheckedChange={setShowActivityBar}
-                disabled
-              >
-                Activity Bar
+                {profileData?.email}
               </DropdownMenuCheckboxItem>
               <DropdownMenuCheckboxItem
                 checked={showPanel}

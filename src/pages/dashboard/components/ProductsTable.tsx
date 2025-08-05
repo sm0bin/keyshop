@@ -112,7 +112,7 @@ const ProductsTable = () => {
   };
 
   return (
-    <section className="px-4 md:px-8 lg:pl-20 bg-gradient-to-br h-screen">
+    <section className="px-4 md:px-8 bg-gradient-to-br">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
           Products List
