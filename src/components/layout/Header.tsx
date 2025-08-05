@@ -4,7 +4,6 @@ import { CircleUserRound, ShoppingBasket } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { logout, selectUser } from "@/redux/features/auth/authSlice";
 import { useGetCartQuery } from "@/redux/features/cart/cartApi";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -16,7 +15,7 @@ import {
 import type { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { useEffect, useState } from "react";
 import { useGetProfileQuery } from "@/redux/features/auth/authApi";
-
+import { Link as CustomLink } from "@/components/ui/link";
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 const Header = () => {
@@ -141,12 +140,7 @@ const Header = () => {
           //   <CircleUserRound size={32} strokeWidth="1" />
           //   {user.role}
           // </Link>
-          <Link
-            className="w-full px-4 py-2 rounded-lg border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
-            to="/login"
-          >
-            Login
-          </Link>
+          <CustomLink to="/login">Login</CustomLink>
         )}
       </div>
     </nav>

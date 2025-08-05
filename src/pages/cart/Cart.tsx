@@ -22,7 +22,9 @@ import type { ICartItem } from "@/types";
 //   // updateCartItem,
 // } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hook";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/components/ui/link";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
@@ -72,7 +74,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 pt-20">
+    <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
@@ -102,9 +104,7 @@ const Cart = () => {
             <p className="text-white/60 text-lg mb-8">
               Looks like you haven't added any items to your cart yet
             </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-              Continue Shopping
-            </button>
+            <Link to="/products">Continue Shopping</Link>
           </div>
         )}
 
@@ -246,24 +246,28 @@ const Cart = () => {
                   </div>
                 </div>
 
+                {/* Checkout Buttons */}
                 <div className="space-y-3">
-                  <Link to="/checkout">
-                    <button className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                      Proceed to Checkout
-                    </button>
+                  <Link className="w-full block " to="/checkout">
+                    Proceed to Checkout
                   </Link>
 
-                  <button className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl font-semibold transition-colors border border-white/20">
+                  <Link
+                    className="w-full block"
+                    variant={"secondary"}
+                    to="/checkout"
+                  >
                     Continue Shopping
-                  </button>
+                  </Link>
 
-                  <button
+                  <Button
                     onClick={() => handleClearCart(userId)}
-                    className="w-full py-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-xl transition-colors font-semibold disabled:opacity-50 border border-red-500/20"
+                    className="w-full"
+                    variant={"destructive"}
                     disabled={isClearing}
                   >
                     {isClearing ? "Clearing..." : "Clear Cart"}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
