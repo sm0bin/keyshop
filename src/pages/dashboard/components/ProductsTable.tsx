@@ -77,7 +77,6 @@ const ProductsTable = () => {
 
   const openEditDialog = (product) => {
     setEditingProduct({
-      _id: product._id,
       image: product.image,
       title: product.title,
       brand: product.brand,
@@ -112,14 +111,14 @@ const ProductsTable = () => {
   };
 
   return (
-    <section className="px-4 md:px-8 bg-gradient-to-br">
+    <section className="px-4 md:px-8">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
           Products List
         </h2>
         <Link
           to="add-products"
-          className="px-4 py-2 rounded-lg border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
+          className="px-4 py-2 rounded-full border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
         >
           Add Product
         </Link>
@@ -161,7 +160,7 @@ const ProductsTable = () => {
                 </TableCell>
                 <TableCell className="text-right flex items-center justify-end gap-2">
                   <Button
-                    variant="outline"
+                    // variant="outline"
                     onClick={() => openEditDialog(product)}
                   >
                     Edit
@@ -169,12 +168,17 @@ const ProductsTable = () => {
 
                   <AlertDialog>
                     <AlertDialogTrigger asChild>
-                      <Button variant="outline">Delete</Button>
+                      <Button
+                        variant="destructive"
+                        className="rounded-full bg-red-400/30 border border-red-400 hover:bg-red-400/40 hover:text-white"
+                      >
+                        Delete
+                      </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent>
+                    <AlertDialogContent className="bg-white/10 backdrop-blur-md border border-white/10 text-gray-200">
                       <AlertDialogHeader>
                         <AlertDialogTitle>Confirm Delete?</AlertDialogTitle>
-                        <AlertDialogDescription>
+                        <AlertDialogDescription className="text-gray-300">
                           This action cannot be undone. This will permanently
                           delete product:{" "}
                           <span className="font-semibold">{product.title}</span>
@@ -182,7 +186,9 @@ const ProductsTable = () => {
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel className="bg-white/20 rounded-full border border-white/20   hover:bg-white/30 hover:text-white">
+                          Cancel
+                        </AlertDialogCancel>
                         <AlertDialogAction
                           onClick={() => handleDelete(product._id)}
                         >
@@ -200,10 +206,10 @@ const ProductsTable = () => {
 
       {/* Edit Dialog - Outside the table to avoid nesting issues */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-xl bg-white/10 backdrop-blur-md border border-white/10 text-gray-200">
           <DialogHeader>
             <DialogTitle>Edit Product</DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-gray-300">
               Make changes to your product here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
@@ -212,6 +218,7 @@ const ProductsTable = () => {
               <div className="grid gap-3">
                 <Label htmlFor="image">Image URL</Label>
                 <Input
+                  className="border border-white/20"
                   id="image"
                   name="image"
                   value={editingProduct?.image || ""}
@@ -221,6 +228,7 @@ const ProductsTable = () => {
               <div className="grid gap-3">
                 <Label htmlFor="title">Title</Label>
                 <Input
+                  className="border border-white/20"
                   id="title"
                   name="title"
                   value={editingProduct?.title || ""}
@@ -230,6 +238,7 @@ const ProductsTable = () => {
               <div className="grid gap-3">
                 <Label htmlFor="brand">Brand</Label>
                 <Input
+                  className="border border-white/20"
                   id="brand"
                   name="brand"
                   value={editingProduct?.brand || ""}
@@ -239,6 +248,7 @@ const ProductsTable = () => {
               <div className="grid gap-3">
                 <Label htmlFor="quantity">Quantity</Label>
                 <Input
+                  className="border border-white/20"
                   id="quantity"
                   name="quantity"
                   type="number"
@@ -249,6 +259,7 @@ const ProductsTable = () => {
               <div className="grid gap-3">
                 <Label htmlFor="rating">Rating</Label>
                 <Input
+                  className="border border-white/20"
                   id="rating"
                   name="rating"
                   type="number"
@@ -262,6 +273,7 @@ const ProductsTable = () => {
               <div className="grid gap-3">
                 <Label htmlFor="price">Price</Label>
                 <Input
+                  className="border border-white/20"
                   id="price"
                   name="price"
                   type="number"
@@ -274,6 +286,7 @@ const ProductsTable = () => {
               <div className="grid gap-3">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
+                  className="border border-white/20"
                   id="description"
                   name="description"
                   value={editingProduct?.description || ""}
@@ -283,7 +296,7 @@ const ProductsTable = () => {
             </div>
             <DialogFooter className="mt-4">
               <DialogClose asChild>
-                <Button type="button" variant="outline">
+                <Button type="button" variant="secondary">
                   Cancel
                 </Button>
               </DialogClose>
