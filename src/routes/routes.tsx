@@ -1,5 +1,4 @@
 import App from "@/App";
-import UserLayout from "@/layout/UserLayout";
 import AboutUs from "@/pages/about/AboutUs";
 import Cart from "@/pages/cart/Cart";
 import ContactUs from "@/pages/contact/ContactUs";
@@ -16,6 +15,8 @@ import ProductDetails from "@/pages/productDetails/ProductDetails";
 import Checkout from "@/pages/checkout/Checkout";
 import Return from "@/pages/stripe/Return";
 import CheckoutForm from "@/pages/stripe/CheckoutForm";
+import Success from "@/pages/stripe/Success";
+import Cancel from "@/pages/stripe/Cancel";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,15 @@ const router = createBrowserRouter([
         path: "/about",
         element: <AboutUs />,
       },
+      {
+        path: "/success",
+        element: <Success />,
+      },
+      {
+        path: "/cancel",
+        element: <Cancel />,
+      },
+
       {
         path: "/contact",
         element: <ContactUs />,
@@ -87,50 +97,28 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin",
+        path: "/dashboard",
         element: (
           <ProtectedRoute>
-            <UserLayout />
+            <Dashboard />
           </ProtectedRoute>
         ),
         children: [
           {
-            path: "dashboard",
-            element: <Dashboard />,
-            children: [
-              {
-                path: "",
-                element: <ProductsTable />,
-              },
-              {
-                path: "add-products",
-                element: <AddProduct />,
-              },
-            ],
+            path: "",
+            element: (
+              <ProtectedRoute>
+                <ProductsTable />
+              </ProtectedRoute>
+            ),
           },
-        ],
-      },
-      {
-        path: "/user",
-        element: (
-          <ProtectedRoute>
-            <UserLayout />
-          </ProtectedRoute>
-        ),
-        children: [
           {
-            path: "dashboard",
-            element: <Dashboard />,
-            children: [
-              {
-                path: "products",
-                element: <ProductsTable />,
-              },
-              {
-                path: "add-products",
-                element: <AddProduct />,
-              },
-            ],
+            path: "add-products",
+            element: (
+              <ProtectedRoute>
+                <AddProduct />
+              </ProtectedRoute>
+            ),
           },
         ],
       },

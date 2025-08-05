@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Mail, Lock } from "lucide-react";
+import { Mail, Lock, EyeClosed, Eye } from "lucide-react";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +18,8 @@ export default function Login() {
     password: "",
   });
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -31,7 +32,11 @@ export default function Login() {
         const user = verifyToken(response.data.accessToken);
         dispatch(setUser({ user: user, token: response.data.accessToken }));
         toast.success("Login successful!");
-        navigate(`/${user.role}/dashboard`);
+        if (user.role === "admin") {
+          navigate(`/dashboard`);
+        } else {
+          navigate("/products");
+        }
       })
       .catch((error) => {
         toast.error("Login failed. Please try again.");
@@ -40,16 +45,19 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1f1c2c] via-[#928dab] to-[#1f1c2c] flex items-center justify-center p-4">
+    <div className="min-h-screen  flex items-center justify-center p-4">
       <div className="w-full max-w-md glass-card rounded-2xl p-8 shadow-xl border border-white/20 backdrop-blur-md">
         <h2 className="text-3xl font-bold text-white text-center mb-6">
           Login
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <Mail className="absolute left-3 top-3 text-white/60" size={18} />
+            <Mail
+              className="absolute left-2 inset-y-2 text-gray-400/60"
+              size={18}
+            />
             <Input
-              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30"
+              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 rounded-full"
               placeholder="Email"
               name="email"
               value={form.email}
@@ -58,10 +66,19 @@ export default function Login() {
             />
           </div>
           <div className="relative">
-            <Lock className="absolute left-3 top-3 text-white/60" size={18} />
+            <Lock
+              className="absolute left-2 inset-y-2 text-gray-400/60"
+              size={18}
+            />
+            <button
+              className="absolute right-2 inset-y-2 text-gray-400/60"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            >
+              {passwordVisible ? <EyeClosed size={16} /> : <Eye size={16} />}
+            </button>
             <Input
-              type="password"
-              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30"
+              type={passwordVisible ? "text" : "password"}
+              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 rounded-full"
               placeholder="Password"
               name="password"
               value={form.password}
@@ -69,11 +86,7 @@ export default function Login() {
               required
             />
           </div>
-          <Button
-            type="submit"
-            className="w-full bg-white text-black hover:bg-gray-200 font-bold"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             Login
           </Button>
         </form>

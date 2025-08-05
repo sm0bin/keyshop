@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Mail, Lock, User } from "lucide-react";
-import { useAppDispatch } from "@/redux/hook";
+import { Mail, Lock, User, EyeClosed, Eye } from "lucide-react";
 import { useCreateUserMutation } from "@/redux/features/auth/authApi";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -16,6 +15,8 @@ export default function Signup() {
     email: "",
     password: "",
   });
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -57,16 +58,19 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md glass-card rounded-2xl p-8 shadow-xl border border-white/20 backdrop-blur-md">
         <h2 className="text-3xl font-bold text-white text-center mb-6">
           Sign Up
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <User className="absolute left-3 top-3 text-white/60" size={18} />
+            <User
+              className="absolute left-2 inset-y-2 text-gray-400/60"
+              size={18}
+            />
             <Input
-              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30"
+              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 rounded-full"
               placeholder="Name"
               name="name"
               value={form.name}
@@ -75,9 +79,12 @@ export default function Signup() {
             />
           </div>
           <div className="relative">
-            <Mail className="absolute left-3 top-3 text-white/60" size={18} />
+            <Mail
+              className="absolute left-2 inset-y-2 text-gray-400/60"
+              size={18}
+            />
             <Input
-              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 focus:bg-white/20"
+              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 rounded-full"
               placeholder="Email"
               name="email"
               value={form.email}
@@ -86,10 +93,19 @@ export default function Signup() {
             />
           </div>
           <div className="relative">
-            <Lock className="absolute left-3 top-3 text-white/60" size={18} />
+            <Lock
+              className="absolute left-2 inset-y-2 text-gray-400/60"
+              size={18}
+            />
+            <button
+              className="absolute right-2 inset-y-2 text-gray-400/60"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+            >
+              {passwordVisible ? <EyeClosed size={16} /> : <Eye size={16} />}
+            </button>
             <Input
-              type="password"
-              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30"
+              type={passwordVisible ? "text" : "password"}
+              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 rounded-full"
               placeholder="Password"
               name="password"
               value={form.password}
@@ -97,11 +113,7 @@ export default function Signup() {
               required
             />
           </div>
-          <Button
-            type="submit"
-            className="w-full border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             Sign Up
           </Button>
         </form>
