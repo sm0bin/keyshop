@@ -39,7 +39,7 @@ const linkVariants = cva(
 export interface LinkProps
   extends Omit<RouterLinkProps, "to">,
     VariantProps<typeof linkVariants> {
-  to: string;
+  to: string | number;
   className?: string;
 }
 

@@ -12,7 +12,6 @@ import {
   useUpdateProductMutation,
 } from "@/redux/features/product/productApi";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,6 +38,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import React from "react";
+import { Link } from "@/components/ui/link";
 
 const ProductsTable = () => {
   const { data, isLoading, isError } = useGetProductsQuery(undefined);
@@ -116,12 +116,7 @@ const ProductsTable = () => {
         <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
           Products List
         </h2>
-        <Link
-          to="add-products"
-          className="px-4 py-2 rounded-full border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-semibold"
-        >
-          Add Product
-        </Link>
+        <Link to="add-products">Add Product</Link>
       </div>
 
       <div className="rounded-md border border-white/30 backdrop-blur-md bg-white/10 h-[80vh] overflow-y-auto">

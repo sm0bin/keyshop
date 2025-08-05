@@ -79,9 +79,13 @@ const Cart = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <button className="p-2 hover:bg-white/10 rounded-full transition-colors">
+            <Link
+              to={-1}
+              variant={"ghost"}
+              className="p-2 hover:bg-white/10 rounded-full transition-colors"
+            >
               <ArrowLeft className="w-6 h-6 text-white" />
-            </button>
+            </Link>
             <h1 className="text-4xl font-bold text-white flex items-center gap-3">
               <ShoppingBag className="w-8 h-8" />
               Shopping Cart

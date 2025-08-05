@@ -20,24 +20,24 @@ const keyboardBrands = [
     icon: "/brands/corsair.svg",
   },
   {
-    name: "HP",
-    icon: "/brands/hp.svg",
-  },
-  {
     name: "Logitech",
     icon: "/brands/logitech.svg",
   },
   {
-    name: "Razer",
-    icon: "/brands/razer.svg",
+    name: "SteelSeries",
+    icon: "/brands/steelseries.svg",
   },
   {
     name: "Redragon",
     icon: "/brands/redragon.svg",
   },
   {
-    name: "SteelSeries",
-    icon: "/brands/steelseries.svg",
+    name: "HP",
+    icon: "/brands/hp.svg",
+  },
+  {
+    name: "Razer",
+    icon: "/brands/razer.svg",
   },
 ];
 
