@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useAddProductMutation } from "@/redux/features/product/productApi";
 import React from "react";
@@ -49,92 +50,93 @@ const AddProduct = () => {
       });
   };
   return (
-    <div className="w-full max-w-md glass-card rounded-2xl p-8 shadow-xl border border-white/20 backdrop-blur-md mx-auto text-white">
-      <h1>Add New Product</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="image">Image URL:</label>
-          <Input
-            type="text"
-            id="image"
-            name="image"
-            required
-            value={formData.image}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <Input
-            type="text"
-            id="title"
-            name="title"
-            required
-            value={formData.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="brand">Brand:</label>
-          <Input
-            type="text"
-            id="brand"
-            name="brand"
-            required
-            value={formData.brand}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="quantity">Quantity:</label>
-          <Input
-            type="number"
-            id="quantity"
-            name="quantity"
-            required
-            value={formData.quantity}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="price">Price:</label>
-          <Input
-            type="number"
-            id="price"
-            name="price"
-            required
-            value={formData.price}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="rating">Rating:</label>
-          <Input
-            type="number"
-            id="rating"
-            name="rating"
-            required
-            value={formData.rating}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <Textarea
-            id="description"
-            name="description"
-            required
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
-        <Button
-          className="bg-white text-black hover:bg-gray-200 font-bold w-full mt-4"
-          type="submit"
-        >
-          Add Product
-        </Button>
-      </form>
+    <div className="w-full flex justify-center items-center h-[90vh]">
+      <div className="w-md glass-card rounded-2xl p-8 shadow-xl border border-white/20 backdrop-blur-md mx-auto text-white">
+        <h1 className="text-2xl font-semibold mb-4 text-center">
+          Add New Product
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div>
+            <Label htmlFor="image">Image URL:</Label>
+            <Input
+              type="text"
+              id="image"
+              name="image"
+              required
+              value={formData.image}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="title">Title:</Label>
+            <Input
+              type="text"
+              id="title"
+              name="title"
+              required
+              value={formData.title}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="brand">Brand:</Label>
+            <Input
+              type="text"
+              id="brand"
+              name="brand"
+              required
+              value={formData.brand}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="quantity">Quantity:</Label>
+            <Input
+              type="number"
+              id="quantity"
+              name="quantity"
+              required
+              value={formData.quantity}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="price">Price:</Label>
+            <Input
+              type="number"
+              id="price"
+              name="price"
+              required
+              value={formData.price}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="rating">Rating:</Label>
+            <Input
+              type="number"
+              id="rating"
+              name="rating"
+              required
+              value={formData.rating}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor="description">Description:</Label>
+            <Textarea
+              id="description"
+              name="description"
+              required
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </div>
+          <Button className="w-full" type="submit">
+            Add Product
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
