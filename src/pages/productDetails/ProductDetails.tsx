@@ -89,7 +89,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 p-4 md:p-8">
+    <div className="min-h-screen ">
       <div className="max-w-7xl mx-auto">
         {/* Glassmorphism Container */}
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
@@ -138,25 +138,6 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              {/* Features */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
-                  <Truck className="w-6 h-6 text-blue-400 mx-auto mb-2" />
-                  <p className="text-xs text-gray-300">Free Shipping</p>
-                </div>
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
-                  <Shield className="w-6 h-6 text-green-400 mx-auto mb-2" />
-                  <p className="text-xs text-gray-300">2 Year Warranty</p>
-                </div>
-                <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
-                  <RotateCcw className="w-6 h-6 text-purple-400 mx-auto mb-2" />
-                  <p className="text-xs text-gray-300">30 Day Return</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Product Details */}
-            <div className="space-y-6">
               {/* Brand & Title */}
               <div>
                 <div className="inline-block px-3 py-1 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full border border-purple-500/30 mb-3">
@@ -187,12 +168,31 @@ const ProductDetails = () => {
                   Save ৳{(product.price * 0.2).toLocaleString()}
                 </p>
               </div>
+            </div>
 
+            {/* Product Details */}
+            <div className="space-y-6">
               {/* Description */}
               <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <p className="text-gray-300 leading-relaxed">
                   {product.description}
                 </p>
+              </div>
+
+              {/* Features */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
+                  <Truck className="w-6 h-6 text-blue-400 mx-auto mb-2" />
+                  <p className="text-xs text-gray-300">Free Shipping</p>
+                </div>
+                <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
+                  <Shield className="w-6 h-6 text-green-400 mx-auto mb-2" />
+                  <p className="text-xs text-gray-300">2 Year Warranty</p>
+                </div>
+                <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
+                  <RotateCcw className="w-6 h-6 text-purple-400 mx-auto mb-2" />
+                  <p className="text-xs text-gray-300">30 Day Return</p>
+                </div>
               </div>
 
               {/* Quantity & Stock */}

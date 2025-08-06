@@ -1,12 +1,27 @@
 import { CircleCheck } from "lucide-react";
-import React from "react";
 
 const Success = () => {
   return (
-    <div>
-      <CircleCheck className="w-12 h-12 text-green-500 mb-4" />
-      <h2 className="text-3xl font-bold mb-4">Your payment was successful</h2>
-      <p className="text-lg">Thank you for your purchase!</p>
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="bg-white/20 backdrop-blur-md rounded-3xl shadow-2xl border border-white/30 p-8 max-w-md w-full text-center">
+        <div className="flex justify-center mb-6">
+          <div className="bg-green-500/80 backdrop-blur-sm rounded-full p-4 border border-green-500/30">
+            <CircleCheck className="w-16 h-16 text-white" />
+          </div>
+        </div>
+        <h2 className="text-3xl font-bold mb-4 text-white">
+          Payment Successful!
+        </h2>
+        <p className="text-lg text-white/90 mb-6">
+          Thank you for your purchase. Your transaction has been completed
+          successfully.
+        </p>
+        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+          <p className="text-sm text-white/80">
+            You will receive a confirmation email shortly.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
