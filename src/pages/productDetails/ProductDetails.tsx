@@ -15,6 +15,9 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useParams } from "react-router-dom";
 import { useGetProductQuery } from "@/redux/features/product/productApi";
+import { Button } from "@/components/ui/button";
+import { useAddItemToCartMutation } from "@/redux/features/cart/cartApi";
+import { toast } from "sonner";
 
 const StarRating = ({ rating, totalStars = 5 }) => {
   return (
@@ -42,6 +45,7 @@ const ProductDetails = () => {
   const [addedToCart, setAddedToCart] = useState(false);
   const id = useParams().id;
   const { data, isLoading, error } = useGetProductQuery(id);
+  const [addToCart, { isLoading: isAddingToCart }] = useAddItemToCartMutation();
 
   if (!id) {
     return (
@@ -86,10 +90,20 @@ const ProductDetails = () => {
   const handleAddToCart = () => {
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
+    addToCart({ productId: product._id, quantity, price: product.price })
+      .unwrap()
+      .then((response) => {
+        console.log("Item added to cart:", response);
+        toast.success("Item added to cart successfully!");
+      })
+      .catch((error) => {
+        console.error("Failed to add item to cart:", error);
+        toast.error("Failed to add item to cart.");
+      });
   };
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen flex items-center justify-center ">
       <div className="max-w-7xl mx-auto">
         {/* Glassmorphism Container */}
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
@@ -129,11 +143,11 @@ const ProductDetails = () => {
             <div className="space-y-4">
               <div className="relative group">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl blur-xl"></div>
-                <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10">
+                <div className="relative bg-white/5 rounded-2xl overflow-hidden border border-white/10">
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-96 object-contain transform group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               </div>
@@ -155,10 +169,10 @@ const ProductDetails = () => {
               <div className="space-y-2">
                 <div className="flex items-baseline gap-3">
                   <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    ৳{product.price}
+                    ${product.price}
                   </span>
                   <span className="text-lg text-gray-400 line-through">
-                    ৳{(product.price * 1.2).toLocaleString()}
+                    ${(product.price * 1.2).toLocaleString()}
                   </span>
                   <span className="px-2 py-1 bg-red-500/20 text-red-400 text-sm rounded-md">
                     20% OFF
@@ -177,6 +191,17 @@ const ProductDetails = () => {
                 <p className="text-gray-300 leading-relaxed">
                   {product.description}
                 </p>
+              </div>
+
+              {/* Key Features */}
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <h3 className="text-white font-semibold mb-3">Key Features</h3>
+                <ul className="space-y-2 text-gray-300 text-sm list-disc  list-inside">
+                  <li>Razer Green mechanical switches</li>
+                  <li>Tournament-grade performance</li>
+                  <li>Full RGB customization</li>
+                  <li>Compact 65% layout</li>
+                </ul>
               </div>
 
               {/* Features */}
@@ -226,9 +251,11 @@ const ProductDetails = () => {
 
               {/* Action Buttons */}
               <div className="space-y-4">
-                <button
+                <Button
+                  size="lg"
                   onClick={handleAddToCart}
-                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl flex items-center justify-center gap-3"
+                  className="w-full"
+                  disabled={isAddingToCart}
                 >
                   {addedToCart ? (
                     <>
@@ -242,34 +269,11 @@ const ProductDetails = () => {
                       {(product.price * quantity).toLocaleString()}
                     </>
                   )}
-                </button>
+                </Button>
 
-                <button className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-6 rounded-xl border border-white/20 transition-all duration-300">
+                {/* <button className="w-full bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-6 rounded-xl border border-white/20 transition-all duration-300">
                   Buy Now
-                </button>
-              </div>
-
-              {/* Key Features */}
-              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                <h3 className="text-white font-semibold mb-3">Key Features</h3>
-                <ul className="space-y-2 text-gray-300 text-sm">
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
-                    Razer Green mechanical switches
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
-                    Tournament-grade performance
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
-                    Full RGB customization
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
-                    Compact 65% layout
-                  </li>
-                </ul>
+                </button> */}
               </div>
             </div>
           </div>
