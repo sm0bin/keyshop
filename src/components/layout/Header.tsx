@@ -100,12 +100,14 @@ const Header = () => {
 
       {/* Cart and Profile */}
       <div className="flex items-center gap-6 text-white">
-        <Link to="/cart" className="relative">
-          <ShoppingBasket size={32} strokeWidth="1" />
-          <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-semibold rounded-full px-1.5">
-            {cartLoading ? "0" : data?.data?.totalItems || 0}
-          </span>
-        </Link>
+        {isLoggedIn && (
+          <Link to="/cart" className="relative">
+            <ShoppingBasket size={32} strokeWidth="1" />
+            <span className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-semibold rounded-full px-1.5">
+              {cartLoading ? "0" : data?.data?.totalItems || 0}
+            </span>
+          </Link>
+        )}
 
         {isLoggedIn ? (
           <DropdownMenu>

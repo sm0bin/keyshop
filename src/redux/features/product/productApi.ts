@@ -50,11 +50,14 @@ const productApi = baseApi.injectEndpoints({
       invalidatesTags: ["product"],
     }),
     updateProduct: builder.mutation({
-      query: (product) => ({
-        url: `/products/${product._id}`,
-        method: "PUT",
-        body: product,
-      }),
+      query: (product) => {
+        console.log("Updating product:", product);
+        return {
+          url: `/products/${product._id}`,
+          method: "PUT",
+          body: product,
+        };
+      },
       invalidatesTags: ["product"],
     }),
     deleteProduct: builder.mutation({

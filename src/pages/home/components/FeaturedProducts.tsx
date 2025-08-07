@@ -1,7 +1,7 @@
 import ProductCard from "@/components/shared/ProductCard";
+import { Link } from "@/components/ui/link";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 import type { IProduct } from "@/types";
-import { Link } from "react-router-dom";
 
 const FeaturedProducts = () => {
   const { data, isLoading, error } = useGetProductsQuery(undefined);
@@ -36,10 +36,7 @@ const FeaturedProducts = () => {
           <ProductCard key={product._id} product={product} />
         ))}
       </div>
-      <Link
-        className=" rounded-full border border-white/40 bg-white/25 text-white backdrop-blur-md hover:bg-white/35 transition shadow-lg shadow-white/10 font-medium mt-12 px-4 py-2 mx-auto block w-fit"
-        to="/products"
-      >
+      <Link className="mt-10 block mx-auto w-fit" to="/products">
         View All
       </Link>
     </section>

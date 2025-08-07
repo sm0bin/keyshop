@@ -6,6 +6,8 @@ import {
   Trash2,
   ShoppingBag,
   ArrowLeft,
+  LoaderPinwheel,
+  Loader,
 } from "lucide-react";
 import {
   useAddItemToCartMutation,
@@ -25,6 +27,7 @@ import { useAppSelector } from "@/redux/hook";
 // import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import Spinner from "@/components/ui/spinner";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
@@ -66,11 +69,7 @@ const Cart = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-white"></div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   return (
@@ -259,7 +258,7 @@ const Cart = () => {
                   <Link
                     className="w-full block"
                     variant={"secondary"}
-                    to="/checkout"
+                    to="/products"
                   >
                     Continue Shopping
                   </Link>

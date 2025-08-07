@@ -39,6 +39,8 @@ import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import React from "react";
 import { Link } from "@/components/ui/link";
+import type { IProduct } from "@/types";
+import Spinner from "@/components/ui/spinner";
 
 const ProductsTable = () => {
   const { data, isLoading, isError } = useGetProductsQuery(undefined);
@@ -47,15 +49,20 @@ const ProductsTable = () => {
   const products = data?.data || [];
 
   // State for each product's edit form
-  const [editingProduct, setEditingProduct] = React.useState(null);
+  const [editingProduct, setEditingProduct] = React.useState({
+    id: "",
+    image: "",
+    title: "",
+    brand: "",
+    quantity: 0,
+    price: 0,
+    rating: 0,
+    description: "",
+  });
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (isError) {
@@ -75,8 +82,9 @@ const ProductsTable = () => {
     }
   };
 
-  const openEditDialog = (product) => {
+  const openEditDialog = (product: IProduct) => {
     setEditingProduct({
+      _id: product._id,
       image: product.image,
       title: product.title,
       brand: product.brand,
@@ -106,7 +114,8 @@ const ProductsTable = () => {
       setDialogOpen(false);
       setEditingProduct(null);
     } catch (error) {
-      toast.error(error.data?.message || "Failed to update product.");
+      toast.error(error.message || "Failed to update product.");
+      console.error("Error updating product:", error);
     }
   };
 

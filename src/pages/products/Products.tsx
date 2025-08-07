@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ProductCard from "@/components/shared/ProductCard";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 import { Button } from "@/components/ui/button";
+import Spinner from "@/components/ui/spinner";
 
 const Products = () => {
   // Filter and search states
@@ -48,11 +49,7 @@ const Products = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (isError) {

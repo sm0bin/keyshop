@@ -15,6 +15,12 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useCreateCheckoutSessionMutation } from "@/redux/features/stripeApi";
 import { loadStripe } from "@stripe/stripe-js";
+import { Card } from "@/components/ui/card";
+import Spinner from "@/components/ui/spinner";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 const Checkout = () => {
   // Sample cart data - in real app this would come from props or context
@@ -27,7 +33,13 @@ const Checkout = () => {
     phone: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    zipCode: "",
+    district: "",
+    thana: "",
+    address: "",
+    phone: "",
+  });
   const [isProcessing, setIsProcessing] = useState(false);
   const { data, isLoading, isError } = useGetCartQuery(undefined);
   const [updateCartAddress, { isLoading: isUpdating }] =
@@ -52,11 +64,7 @@ const Checkout = () => {
   }, [data]);
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
+    return <Spinner />;
   }
 
   if (isError) {
@@ -200,7 +208,7 @@ const Checkout = () => {
   };
 
   const subtotal = cartData.totalAmount + (cartData.discount?.amount || 0);
-  const shippingCost = 100;
+  const shippingCost = 0;
   const finalTotal = cartData.totalAmount + shippingCost;
 
   return (
@@ -208,10 +216,10 @@ const Checkout = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-            <ShoppingCart className="w-8 h-8 text-blue-600" />
+            <ShoppingCart className="w-8 h-8 " />
             Checkout
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-300 mt-2">
             Complete your order by providing shipping details
           </p>
         </div>
@@ -219,7 +227,7 @@ const Checkout = () => {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           {/* Order Summary */}
           <div className="lg:col-span-5">
-            <div className="bg-black rounded-lg shadow-sm border p-6 sticky top-8">
+            <Card className="">
               <h2 className="text-xl font-semibold text-white mb-4">
                 Order Summary
               </h2>
@@ -230,20 +238,18 @@ const Checkout = () => {
                     key={item.productId}
                     className="flex items-center space-x-4"
                   >
-                    <div className="w-16 h-16 bg-gray-800 rounded-lg flex items-center justify-center">
-                      <div className="w-12 h-12 bg-gray-700 rounded">
-                        <img
-                          src={item.product.image}
-                          alt={item.product.title}
-                          className="w-full h-full object-cover rounded"
-                        />
-                      </div>
+                    <div className="w-12 h-12 bg-gray-700 rounded border border-white/20">
+                      <img
+                        src={item.product.image}
+                        alt={item.product.title}
+                        className="w-full h-full object-cover rounded"
+                      />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-medium text-white">
                         {item.product.title}
                       </h3>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-300">
                         Quantity: {item.quantity}
                       </p>
                     </div>
@@ -258,7 +264,7 @@ const Checkout = () => {
 
               <div className="border-t pt-4 space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">
+                  <span className="text-gray-300">
                     Subtotal ({cartData.totalItems} items)
                   </span>
                   <span className="text-white">৳{subtotal}</span>
@@ -276,7 +282,7 @@ const Checkout = () => {
                 )}
 
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 flex items-center gap-1">
+                  <span className="text-gray-300 flex items-center gap-1">
                     <Truck className="w-4 h-4" />
                     Shipping
                   </span>
@@ -285,16 +291,16 @@ const Checkout = () => {
 
                 <div className="border-t pt-2 flex justify-between text-lg font-semibold">
                   <span className="text-white">Total</span>
-                  <span className="text-blue-600">৳{finalTotal}</span>
+                  <span className="">৳{finalTotal}</span>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
 
           {/* Shipping Form */}
           <div className="lg:col-span-7 mt-8 lg:mt-0">
             <div className="space-y-6">
-              <div className="bg-black rounded-lg shadow-sm border p-6">
+              <Card className="">
                 <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-blue-600" />
                   Shipping Address
@@ -302,28 +308,33 @@ const Checkout = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Country
-                    </label>
-                    <input
+                    <Label>Country</Label>
+                    <Input
                       type="text"
                       name="country"
                       value={shippingAddress.country}
                       readOnly
-                      className="w-full px-3 py-2 border border-gray-700 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      District *
-                    </label>
-                    <select
+                    <Label>District *</Label>
+                    <Input
+                      type="text"
                       name="district"
                       value={shippingAddress.district}
                       onChange={handleInputChange}
-                      className={`w-full px-3 py-2 bg-black border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                        errors.district ? "border-red-500" : "border-gray-700"
+                      placeholder="e.g., Dhaka"
+                      className={`${
+                        errors.district ? "border-red-300" : "border-gray-700"
+                      }`}
+                    />
+                    {/* <select
+                      name="district"
+                      value={shippingAddress.district}
+                      onChange={handleInputChange}
+                      className={`w-full px-3 py-2 bg-black border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent ${
+                        errors.district ? "border-red-300" : "border-gray-700"
                       }`}
                     >
                       <option value="">Select District</option>
@@ -332,7 +343,7 @@ const Checkout = () => {
                           {district}
                         </option>
                       ))}
-                    </select>
+                    </select> */}
                     {errors.district && (
                       <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
                         <AlertCircle className="w-4 h-4" />
@@ -342,18 +353,16 @@ const Checkout = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Zip Code *
-                    </label>
-                    <input
+                    <Label>Zip Code *</Label>
+                    <Input
                       type="text"
                       name="zipCode"
                       value={shippingAddress.zipCode}
                       onChange={handleInputChange}
                       placeholder="e.g., 1000"
                       // maxLength="4"
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                        errors.zipCode ? "border-red-500" : "border-gray-700"
+                      className={`${
+                        errors.zipCode ? "border-red-300" : "border-gray-700"
                       }`}
                     />
                     {errors.zipCode && (
@@ -365,17 +374,15 @@ const Checkout = () => {
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Thana/Upazila *
-                    </label>
-                    <input
+                    <Label>Thana/Upazila *</Label>
+                    <Input
                       type="text"
                       name="thana"
                       value={shippingAddress.thana}
                       onChange={handleInputChange}
                       placeholder="Enter your thana/upazila"
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                        errors.thana ? "border-red-500" : "border-gray-700"
+                      className={`${
+                        errors.thana ? "border-red-300" : "border-gray-700"
                       }`}
                     />
                     {errors.thana && (
@@ -387,17 +394,15 @@ const Checkout = () => {
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Address *
-                    </label>
-                    <textarea
+                    <Label>Full Address *</Label>
+                    <Textarea
                       name="address"
                       value={shippingAddress.address}
                       onChange={handleInputChange}
                       // rows="3"
                       placeholder="House/Building number, Road, Area details..."
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${
-                        errors.address ? "border-red-500" : "border-gray-700"
+                      className={`${
+                        errors.address ? "border-red-300" : "border-gray-700"
                       }`}
                     />
                     {errors.address && (
@@ -409,17 +414,15 @@ const Checkout = () => {
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number *
-                    </label>
-                    <input
+                    <Label>Phone Number *</Label>
+                    <Input
                       type="tel"
                       name="phone"
                       value={shippingAddress.phone}
                       onChange={handleInputChange}
                       placeholder="01XXXXXXXXX"
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                        errors.phone ? "border-red-500" : "border-gray-700"
+                      className={`${
+                        errors.phone ? "border-red-300" : "border-gray-700"
                       }`}
                     />
                     {errors.phone && (
@@ -430,61 +433,54 @@ const Checkout = () => {
                     )}
                   </div>
                 </div>
-              </div>
+              </Card>
 
               {/* Delivery Information */}
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
+              <Card className="">
+                <h3 className="text-lg font-medium text-white flex items-center gap-2">
                   <Truck className="w-5 h-5 text-green-600" />
                   Delivery Information
                 </h3>
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div className=" border border-green-200/20 rounded-lg p-4">
                   <div className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-green-600 mt-0.5" />
                     <div>
-                      <p className="text-sm font-medium text-green-800">
+                      <p className="text-sm font-medium text-green-400">
                         Standard Delivery
                       </p>
-                      <p className="text-sm text-green-700 mt-1">
+                      <p className="text-sm text-gray-300 mt-1">
                         Expected delivery: 3-5 business days
                       </p>
-                      <p className="text-sm text-green-700">
+                      <p className="text-sm text-gray-300">
                         Delivery charge: ৳{shippingCost}
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Card>
 
               {/* Submit Button */}
-              <div className="bg-white rounded-lg shadow-sm border p-6">
-                <button
+              <Card className="">
+                <Button
+                  size={"lg"}
                   onClick={handleSubmit}
                   disabled={isProcessing}
-                  className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-white font-medium transition-colors ${
-                    isProcessing
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  }`}
                 >
                   {isProcessing ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Processing...
-                    </>
+                    <>Processing...</>
                   ) : (
                     <>
                       <CreditCard className="w-5 h-5" />
                       Proceed to Payment
                     </>
                   )}
-                </button>
+                </Button>
 
-                <p className="text-xs text-gray-500 text-center mt-3">
+                <p className="text-xs text-gray-300 text-center mt-3">
                   By placing this order, you agree to our Terms of Service and
                   Privacy Policy
                 </p>
-              </div>
+              </Card>
             </div>
           </div>
         </div>
