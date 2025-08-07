@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { verifyToken } from "@/utils/funs/verifyToken";
 import { useAppDispatch } from "@/redux/hook";
 import { setUser, type IUser } from "@/redux/features/auth/authSlice";
+import { Card } from "@/components/ui/card";
 
 export default function Login() {
   const [loginUser, { isLoading, isError }] = useLoginMutation();
@@ -46,7 +47,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen  flex items-center justify-center p-4">
-      <div className="w-full max-w-md glass-card rounded-2xl p-8 shadow-xl border border-white/20 backdrop-blur-md">
+      <Card className="w-full max-w-md">
         <h2 className="text-3xl font-bold text-white text-center mb-6">
           Login
         </h2>
@@ -57,7 +58,7 @@ export default function Login() {
               size={18}
             />
             <Input
-              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 rounded-full"
+              className="pl-10"
               placeholder="Email"
               name="email"
               value={form.email}
@@ -71,6 +72,7 @@ export default function Login() {
               size={18}
             />
             <button
+              type="button"
               className="absolute right-2 inset-y-2 text-gray-400/60"
               onClick={() => setPasswordVisible(!passwordVisible)}
             >
@@ -78,7 +80,7 @@ export default function Login() {
             </button>
             <Input
               type={passwordVisible ? "text" : "password"}
-              className="pl-10 bg-white/10 text-white placeholder:text-white/70 border-white/30 rounded-full"
+              className="pl-10"
               placeholder="Password"
               name="password"
               value={form.password}
@@ -96,7 +98,7 @@ export default function Login() {
             Sign up
           </a>
         </p>
-      </div>
+      </Card>
     </div>
   );
 }

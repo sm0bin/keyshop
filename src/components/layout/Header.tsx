@@ -6,16 +6,23 @@ import { logout, selectUser } from "@/redux/features/auth/authSlice";
 import { useGetCartQuery } from "@/redux/features/cart/cartApi";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { useEffect, useState } from "react";
 import { useGetProfileQuery } from "@/redux/features/auth/authApi";
 import { Link as CustomLink } from "@/components/ui/link";
+import { Button } from "../ui/button";
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 const Header = () => {
@@ -25,11 +32,11 @@ const Header = () => {
   const isLoggedIn = user && Object.keys(user).length > 0;
   const {
     data,
-    isLoading: cartLoading,
+    isLoading: isCartLoading,
     error: cartError,
   } = useGetCartQuery(undefined);
   // RTK Query hook to fetch profile data
-  const { data: profile, isLoading: profileLoading } =
+  const { data: profile, isLoading: isProfileLoading } =
     useGetProfileQuery(undefined);
 
   const profileData = profile?.data || null;
@@ -104,7 +111,7 @@ const Header = () => {
           <Link to="/cart" className="relative">
             <ShoppingBasket size={32} strokeWidth="1" />
             <span className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-semibold rounded-full px-1.5">
-              {cartLoading ? "0" : data?.data?.totalItems || 0}
+              {isCartLoading ? "-" : data?.data?.totalItems || 0}
             </span>
           </Link>
         )}
@@ -114,34 +121,33 @@ const Header = () => {
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-2 cursor-pointer">
                 <CircleUserRound size={32} strokeWidth="1" />
-                {profileLoading ? "Loading..." : profileData?.name}
+                <span>
+                  {isProfileLoading ? "Loading..." : profileData?.name}
+                </span>
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>
-                {`${profileData?.name} (${profileData?.role})`}
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem
-                checked={showStatusBar}
-                onCheckedChange={setShowStatusBar}
-              >
-                {profileData?.email}
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={showPanel}
-                onCheckedChange={setShowPanel}
-                onClick={() => dispatch(logout())}
-              >
-                Logout
-              </DropdownMenuCheckboxItem>
+            <DropdownMenuContent
+              className="w-56 bg-white/20 border border-white/10 backdrop-blur-md text-white"
+              align="start"
+            >
+              {isProfileLoading || !profileData || (
+                <>
+                  <DropdownMenuLabel>
+                    {profileData?.name} ({profileData?.role})
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator className="opacity-20" />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>{profileData?.email}</DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator className="opacity-20" />
+                </>
+              )}
+              <DropdownMenuItem onClick={() => dispatch(logout())}>
+                Log out
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          // <Link className="flex gap-2 items-center" to="/account">
-          //   <CircleUserRound size={32} strokeWidth="1" />
-          //   {user.role}
-          // </Link>
           <CustomLink to="/login">Login</CustomLink>
         )}
       </div>
