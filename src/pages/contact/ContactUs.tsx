@@ -152,7 +152,7 @@ const ContactUs = () => {
         <div className="text-center mb-16">
           <h2
             ref={headingRef}
-            className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-500"
+            className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-500"
           >
             Get In Touch
           </h2>
@@ -163,125 +163,72 @@ const ContactUs = () => {
           </p>
         </div>
 
-        <div>
-          {/* Contact Cards */}
-          <div ref={contactInfoRef} className="grid grid-cols-2 gap-6 my-6">
-            <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-white">Email Us</h4>
-                  <p className="text-white/70">We'll respond within 24 hours</p>
-                </div>
-              </div>
-              <p className="text-cyan-400 font-medium">support@mechakeys.com</p>
-              <p className="text-white/60">info@mechakeys.com</p>
-            </div>
-
-            <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-white">Call Us</h4>
-                  <p className="text-white/70">Mon-Fri from 9am to 6pm</p>
-                </div>
-              </div>
-              <p className="text-cyan-400 font-medium">+880 1234-567890</p>
-              <p className="text-white/60">+880 1987-654321</p>
-            </div>
-
-            <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-white">Visit Us</h4>
-                  <p className="text-white/70">Come say hello at our office</p>
-                </div>
-              </div>
-              <p className="text-cyan-400 font-medium">
-                123 Tech Street, Dhanmondi
-              </p>
-              <p className="text-white/60">Dhaka 1205, Bangladesh</p>
-            </div>
-
-            <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold text-white">
-                    Business Hours
-                  </h4>
-                  <p className="text-white/70">When we're available</p>
-                </div>
-              </div>
-              <p className="text-cyan-400 font-medium">
-                Mon - Fri: 9:00 AM - 6:00 PM
-              </p>
-              <p className="text-white/60">Sat: 10:00 AM - 4:00 PM</p>
-              <p className="text-white/60">Sun: Closed</p>
-            </div>
-          </div>
-        </div>
-        <div className="grid lg:grid-cols-2 gap-6 items-start">
-          {/* Contact Form */}
-          <div ref={formRef}>
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-xl"
-            >
-              <h3 className="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-500">
-                Send us a Message
-              </h3>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="contact-input bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="contact-input bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
-                  required
-                />
-              </div>
-
-              <input
-                type="text"
-                placeholder="Subject"
-                className="contact-input w-full bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 mb-6"
-                required
-              />
-
-              <textarea
-                rows={5}
-                placeholder="Your Message"
-                className="contact-input w-full bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 mb-6 resize-none"
-                required
-              ></textarea>
-
-              <button
-                type="submit"
-                className="submit-btn w-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-              >
-                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                Send Message
-              </button>
-            </form>
-          </div>
-
+        <div className="grid md:grid-cols-2 gap-6 items-start">
           {/* Contact Information */}
           <div className="space-y-6">
+            {/* Contact Form */}
+            <div ref={formRef}>
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-xl"
+              >
+                <h3 className="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+                  Send us a Message
+                </h3>
+
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    className="contact-input bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    className="contact-input bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
+                    required
+                  />
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Subject"
+                  className="contact-input w-full bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 mb-6"
+                  required
+                />
+
+                <textarea
+                  rows={5}
+                  placeholder="Your Message"
+                  className="contact-input w-full bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 mb-6 resize-none"
+                  required
+                ></textarea>
+
+                <Button type="submit" className="w-full">
+                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  Send Message
+                </Button>
+              </form>
+            </div>
+
+            {/* Map Placeholder */}
+            <div
+              ref={mapRef}
+              className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl"
+            >
+              <h4 className="text-xl font-semibold text-white mb-4">Find Us</h4>
+              <div className="w-full h-48 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center border border-white/10">
+                <div className="text-center">
+                  <MapPin className="w-12 h-12 text-white/60 mx-auto mb-2" />
+                  <p className="text-white/60">Interactive Map</p>
+                  <p className="text-white/40 text-sm">
+                    Click to view directions
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Social Media */}
             <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl">
               <h4 className="text-xl font-semibold text-white mb-4">
@@ -314,21 +261,85 @@ const ContactUs = () => {
                 </a>
               </div>
             </div>
+          </div>
 
-            {/* Map Placeholder */}
-            <div
-              ref={mapRef}
-              className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl"
-            >
-              <h4 className="text-xl font-semibold text-white mb-4">Find Us</h4>
-              <div className="w-full h-48 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center border border-white/10">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-white/60 mx-auto mb-2" />
-                  <p className="text-white/60">Interactive Map</p>
-                  <p className="text-white/40 text-sm">
-                    Click to view directions
-                  </p>
+          {/* Right Section */}
+          <div>
+            {/* Contact Cards */}
+            <div ref={contactInfoRef} className="grid gap-6">
+              <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">
+                      Email Us
+                    </h4>
+                    <p className="text-white/70">
+                      We'll respond within 24 hours
+                    </p>
+                  </div>
                 </div>
+                <p className="text-cyan-400 font-medium">
+                  support@mechakeys.com
+                </p>
+                <p className="text-white/60">info@mechakeys.com</p>
+              </div>
+
+              <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center">
+                    <Phone className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">
+                      Call Us
+                    </h4>
+                    <p className="text-white/70">Mon-Fri from 9am to 6pm</p>
+                  </div>
+                </div>
+                <p className="text-cyan-400 font-medium">+880 1234-567890</p>
+                <p className="text-white/60">+880 1987-654321</p>
+              </div>
+
+              <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">
+                      Visit Us
+                    </h4>
+                    <p className="text-white/70">
+                      Come say hello at our office
+                    </p>
+                  </div>
+                </div>
+                <p className="text-cyan-400 font-medium">
+                  123 Tech Street, Dhanmondi
+                </p>
+                <p className="text-white/60">Dhaka 1205, Bangladesh</p>
+              </div>
+
+              <div className="contact-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl cursor-pointer">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-white">
+                      Business Hours
+                    </h4>
+                    <p className="text-white/70">When we're available</p>
+                  </div>
+                </div>
+                <p className="text-cyan-400 font-medium">
+                  Mon - Fri: 9:00 AM - 6:00 PM
+                </p>
+                <p className="text-white/60">Sat: 10:00 AM - 4:00 PM</p>
+                <p className="text-white/60">Sun: Closed</p>
               </div>
             </div>
           </div>

@@ -11,6 +11,7 @@ import {
   Globe,
   Coffee,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -282,14 +283,14 @@ const AboutUs = () => {
         <div className="text-center mb-20">
           <h1
             ref={headingRef}
-            className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 mb-8"
+            className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-500 mb-8"
           >
             About MechaKeys
           </h1>
           <div ref={textRef} className="space-y-6">
             <p className="text-white/80 text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto">
               At{" "}
-              <span className=" font-semibold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className=" font-semibold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 MechaKeys
               </span>
               , we are passionate about crafting the ultimate typing and gaming
@@ -304,9 +305,12 @@ const AboutUs = () => {
               keyboards—we're building experiences.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <button className="gradient-btn bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <Link
+                to="/products"
+                className="gradient-btn bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
                 Explore Our Products
-              </button>
+              </Link>
               <button className="gradient-btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                 Join Our Community
               </button>
@@ -324,7 +328,7 @@ const AboutUs = () => {
               key={index}
               className="hover-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 text-center"
             >
-              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 {stat.icon}
               </div>
               <div className="text-3xl font-bold text-white mb-2">
@@ -349,7 +353,7 @@ const AboutUs = () => {
                 key={index}
                 className="hover-card bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full flex items-center justify-center mb-4">
                   {value.icon}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
@@ -363,7 +367,7 @@ const AboutUs = () => {
 
         {/* Timeline Section */}
         <div className="mb-20">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
+          <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
             Our Journey
           </h2>
           <div ref={timelineRef} className="space-y-6">
@@ -372,7 +376,7 @@ const AboutUs = () => {
                 key={index}
                 className="hover-card flex items-center gap-6 bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold">{item.year}</span>
                 </div>
                 <div>
@@ -388,7 +392,7 @@ const AboutUs = () => {
 
         {/* Team Section */}
         <div className="mb-20">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-cyan-500">
+          <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
             Meet Our Team
           </h2>
           <div
@@ -426,14 +430,20 @@ const AboutUs = () => {
               typing experience with MechaKeys.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="gradient-btn bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2">
+              <Link
+                to="/products"
+                className="gradient-btn bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              >
                 <Sparkles className="w-5 h-5" />
                 Shop Now
-              </button>
-              <button className="gradient-btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2">
+              </Link>
+              <Link
+                to="/contact"
+                className="gradient-btn bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+              >
                 <Coffee className="w-5 h-5" />
                 Get in Touch
-              </button>
+              </Link>
             </div>
           </div>
         </div>
