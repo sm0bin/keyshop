@@ -242,24 +242,28 @@ const AboutUs = () => {
     {
       name: "Sarah Chen",
       role: "Founder & CEO",
+      image: "https://i.pravatar.cc/150?img=8",
       description: "Mechanical keyboard enthusiast with 10+ years in tech",
       gradient: "from-purple-400 to-pink-500",
     },
     {
       name: "Alex Rodriguez",
       role: "Lead Designer",
+      image: "https://i.pravatar.cc/150?img=9",
       description: "Award-winning designer specializing in ergonomic solutions",
       gradient: "from-cyan-400 to-blue-500",
     },
     {
       name: "Mike Johnson",
       role: "Engineering Lead",
+      image: "https://i.pravatar.cc/150?img=10",
       description: "Hardware expert with expertise in switch technology",
       gradient: "from-green-400 to-emerald-500",
     },
     {
       name: "Lisa Wang",
       role: "Community Manager",
+      image: "https://i.pravatar.cc/150?img=11",
       description: "Building bridges between enthusiasts and innovation",
       gradient: "from-orange-400 to-red-500",
     },
@@ -268,7 +272,7 @@ const AboutUs = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen py-20 px-6 md:px-16 bg-gradient-to-br from-black via-gray-900 to-neutral-900 text-white overflow-hidden"
+      className="relative min-h-screen py-32 px-6 md:px-16 bg-gradient-to-br from-black via-gray-900 to-neutral-900 text-white overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-30">
@@ -283,7 +287,7 @@ const AboutUs = () => {
         <div className="text-center mb-20">
           <h1
             ref={headingRef}
-            className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-500 mb-8"
+            className="text-5xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-500 mb-8"
           >
             About MechaKeys
           </h1>
@@ -407,12 +411,18 @@ const AboutUs = () => {
                 <div
                   className={`w-20 h-20 bg-gradient-to-r ${member.gradient} rounded-full mx-auto mb-4 flex items-center justify-center`}
                 >
-                  <Users className="w-10 h-10 text-white" />
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="rounded-full"
+                  />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-bold text-white mb-0">
                   {member.name}
                 </h3>
-                <p className="text-cyan-400 font-medium mb-3">{member.role}</p>
+                <p className="text-cyan-400 font-medium text-sm mb-2">
+                  {member.role}
+                </p>
                 <p className="text-white/70 text-sm">{member.description}</p>
               </div>
             ))}

@@ -47,7 +47,7 @@ const Cart = () => {
   // console.log("Cart data:", data);
   const { userId, items, totalItems, totalAmount } = data?.data || data || {};
 
-  const handleQuantityChange = (productId, newQuantity) => {
+  const handleQuantityChange = (productId: string, newQuantity: number) => {
     // if (newQuantity < 1) return;
     // updateCartItem({ productId, quantity: newQuantity });
     updateCartItem({ productId, quantity: newQuantity });

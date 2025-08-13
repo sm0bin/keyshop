@@ -139,7 +139,7 @@ const ContactUs = () => {
   };
 
   return (
-    <section className="min-h-screen py-20 px-6 md:px-16 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white relative overflow-hidden">
+    <section className="min-h-screen py-32 px-6 md:px-16 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-20 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse"></div>
@@ -213,7 +213,23 @@ const ContactUs = () => {
             </div>
 
             {/* Map Placeholder */}
+            {/* Map Section */}
             <div
+              ref={mapRef}
+              className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl overflow-hidden"
+            >
+              <h4 className="text-xl font-semibold text-white mb-4">Find Us</h4>
+              <div className="w-full h-80 rounded-lg relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1532.9250374875924!2d91.11328830434645!3d23.962889773271158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375405923fea443f%3A0xbdd5ebaa8959a2af!2sFaruki%20Park!5e0!3m2!1sen!2sbd!4v1754991354478!5m2!1sen!2sbd"
+                  className="w-full h-full rounded-lg border-0 absolute inset-0"
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+            {/* <div
               ref={mapRef}
               className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl"
             >
@@ -225,9 +241,16 @@ const ContactUs = () => {
                   <p className="text-white/40 text-sm">
                     Click to view directions
                   </p>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1532.9250374875924!2d91.11328830434645!3d23.962889773271158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375405923fea443f%3A0xbdd5ebaa8959a2af!2sFaruki%20Park!5e0!3m2!1sen!2sbd!4v1754991354478!5m2!1sen!2sbd"
+                    className="w-full h-full rounded-lg border-0 absolute inset-0"
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Social Media */}
             <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl">

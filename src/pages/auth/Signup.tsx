@@ -6,6 +6,13 @@ import { useCreateUserMutation } from "@/redux/features/auth/authApi";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Signup() {
   //   const dispatch = useAppDispatch();
@@ -15,12 +22,17 @@ export default function Signup() {
     name: "",
     email: "",
     password: "",
+    role: "user",
   });
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleRoleChange = (value: string) => {
+    setForm((prev) => ({ ...prev, role: value }));
   };
 
   const validateForm = () => {
@@ -114,6 +126,21 @@ export default function Signup() {
               onChange={handleChange}
               required
             />
+          </div>
+          <div className="relative">
+            <Select
+              name="role"
+              value={form.role}
+              onValueChange={handleRoleChange}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select role" />
+              </SelectTrigger>
+              <SelectContent className="bg-white/10 backdrop-blur-md border-white/10">
+                <SelectItem value="user">User</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <Button type="submit" className="w-full" disabled={isLoading}>
             Sign Up
