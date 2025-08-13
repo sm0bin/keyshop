@@ -10,38 +10,24 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGetProfileQuery } from "@/redux/features/auth/authApi";
 import { Link as CustomLink } from "@/components/ui/link";
-import { Button } from "../ui/button";
-type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 const Header = () => {
   const [lastScrollTop, setLastScrollTop] = React.useState(0);
   const [navbarStyle, setNavbarStyle] = React.useState("translate-y-0");
   const user = useAppSelector(selectUser);
   const isLoggedIn = user && Object.keys(user).length > 0;
-  const {
-    data,
-    isLoading: isCartLoading,
-    error: cartError,
-  } = useGetCartQuery(undefined);
+  const { data, isLoading: isCartLoading } = useGetCartQuery(undefined);
   // RTK Query hook to fetch profile data
   const { data: profile, isLoading: isProfileLoading } =
     useGetProfileQuery(undefined);
 
   const profileData = profile?.data || null;
-  const [showStatusBar, setShowStatusBar] = useState(true);
-  const [showPanel, setShowPanel] = useState(false);
   const dispatch = useAppDispatch();
 
   const navLinks = [
@@ -74,17 +60,18 @@ const Header = () => {
 
   return (
     <nav
-      className={`py-4 px-6 flex items-center justify-between ${navbarStyle} transition-transform duration-300 ease-in-out fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/10 border border-white/10  shadow-lg hover:transition`}
+      className={`py-4 px-6 flex items-center justify-between ${navbarStyle} transition-transform duration-300 ease-in-out fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/10 border border-white/10  shadow-lg hover:transition flex-col md:flex-row gap-6`}
     >
       {/* Logo */}
-      <div className="flex items-center">
-        <Link className="text-2xl font-bold text-white rounded-md" to="/">
-          MechaKeys
-        </Link>
-      </div>
+      <Link
+        className="text-xl md:text-2xl font-bold text-white rounded-md"
+        to="/"
+      >
+        MechaKeys
+      </Link>
 
       {/* Navigation links */}
-      <div className="flex items-center gap-1 font-medium text-lg text-white">
+      <div className="flex flex-col md:flex-row items-center gap-1 font-medium text-base md:text-lg text-white">
         {navLinks.map((link) => (
           <NavLink
             className="px-3 py-1 rounded-md hover:bg-white/10"
