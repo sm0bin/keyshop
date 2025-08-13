@@ -15,3 +15,12 @@ export interface ICartItem {
   price: number;
   product?: IProduct;
 }
+
+export interface IShippingAddress {
+  country: string;
+  zipCode: string;
+  district: string;
+  thana: string;
+  address: string;
+  phone: string;
+}

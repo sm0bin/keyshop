@@ -17,6 +17,7 @@ import Return from "@/pages/stripe/Return";
 import CheckoutForm from "@/pages/stripe/CheckoutForm";
 import Success from "@/pages/stripe/Success";
 import Cancel from "@/pages/stripe/Cancel";
+import OrderConfirmation from "@/pages/checkout/OrderConfirmation";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Checkout />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/order-confirmation",
+        element: (
+          <ProtectedRoute>
+            <OrderConfirmation />
           </ProtectedRoute>
         ),
       },

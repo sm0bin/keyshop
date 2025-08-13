@@ -6,10 +6,12 @@ import {
   Truck,
   AlertCircle,
   Check,
+  Banknote,
 } from "lucide-react";
 import {
   useGetCartQuery,
   useUpdateCartAddressMutation,
+  useUpdateCartMutation,
 } from "@/redux/features/cart/cartApi";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -47,6 +49,7 @@ const Checkout = () => {
   const [createCheckoutSession, { isLoading: isCreating }] =
     useCreateCheckoutSessionMutation();
   const navigate = useNavigate();
+  const [updateCart, { isLoading: isUpdatingCart }] = useUpdateCartMutation();
 
   // Add this useEffect hook
   useEffect(() => {
@@ -205,6 +208,60 @@ const Checkout = () => {
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const handleCashOnDelivery = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsProcessing(true);
+
+    // Step 1: Update shipping address
+    updateCartAddress(shippingAddress)
+      .unwrap()
+      .then((response) => {
+        if (response.success) {
+          toast.success("Shipping address updated successfully!");
+
+          updateCart({ _id: cartData._id, status: "cash_on_delivery" })
+            .unwrap()
+            .then((cartResponse) => {
+              if (cartResponse.success) {
+                toast.success("Order placed successfully!");
+                navigate("/order-confirmation", {
+                  state: {
+                    shippingAddress,
+                    cartData,
+                  },
+                });
+              } else {
+                throw new Error(
+                  cartResponse.message || "Failed to place order"
+                );
+              }
+            })
+            .catch((error) => {
+              console.error("Error updating cart:", error);
+              toast.error(
+                error?.data?.message ||
+                  error?.message ||
+                  "Failed to update cart"
+              );
+            })
+            .finally(() => {
+              setIsProcessing(false);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating address:", error);
+        toast.error(
+          error?.data?.message ||
+            error?.message ||
+            "Failed to update shipping address"
+        );
+      });
   };
 
   const subtotal = cartData.totalAmount + (cartData.discount?.amount || 0);
@@ -461,20 +518,32 @@ const Checkout = () => {
 
               {/* Submit Button */}
               <Card className="">
-                <Button
-                  size={"lg"}
-                  onClick={handleSubmit}
-                  disabled={isProcessing}
-                >
-                  {isProcessing ? (
-                    <>Processing...</>
-                  ) : (
-                    <>
-                      <CreditCard className="w-5 h-5" />
-                      Proceed to Payment
-                    </>
-                  )}
-                </Button>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button
+                    variant={"secondary"}
+                    onClick={handleCashOnDelivery}
+                    disabled={isProcessing}
+                  >
+                    {isProcessing ? (
+                      <>Processing...</>
+                    ) : (
+                      <>
+                        <Banknote className="w-5 h-5" />
+                        Cash on Delivery
+                      </>
+                    )}
+                  </Button>
+                  <Button onClick={handleSubmit} disabled={isProcessing}>
+                    {isProcessing ? (
+                      <>Processing...</>
+                    ) : (
+                      <>
+                        <CreditCard className="w-5 h-5" />
+                        Proceed to Payment
+                      </>
+                    )}
+                  </Button>
+                </div>
 
                 <p className="text-xs text-gray-300 text-center mt-3">
                   By placing this order, you agree to our Terms of Service and

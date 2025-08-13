@@ -119,7 +119,11 @@ const Cart = () => {
               {items.map((item: ICartItem) => (
                 <div
                   key={item.productId}
-                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg"
+                  className={`bg-white/5 backdrop-blur-md border  ${
+                    item.quantity > (item.product?.quantity || 0)
+                      ? "border-red-500"
+                      : "border-white/10"
+                  } rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg`}
                 >
                   <div className="flex flex-col sm:flex-row gap-6">
                     {/* Product Image */}
@@ -210,6 +214,11 @@ const Cart = () => {
                           </button>
                         </div>
                       </div>
+                      {item.quantity > (item.product?.quantity || 0) && (
+                        <p className="text-red-500 text-sm mt-2">
+                          Not enough stock available
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -251,9 +260,23 @@ const Cart = () => {
 
                 {/* Checkout Buttons */}
                 <div className="space-y-3">
-                  <Link className="w-full block " to="/checkout">
-                    Proceed to Checkout
-                  </Link>
+                  {items.includes(
+                    items.find(
+                      (item: ICartItem) =>
+                        item.quantity > (item.product?.quantity || 0)
+                    )
+                  ) ? (
+                    <Button variant={"destructive"} className="w-full block ">
+                      Proceed to Checkout
+                    </Button>
+                  ) : (
+                    <Link className="w-full block " to="/checkout">
+                      Proceed to Checkout
+                    </Link>
+                    // <p className="text-red-500 text-sm mt-2">
+                    //   Not enough stock available
+                    // </p>
+                  )}
 
                   <Link
                     className="w-full block"
