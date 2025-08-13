@@ -7,7 +7,7 @@ import React from "react";
 import { toast } from "sonner";
 
 const AddProduct = () => {
-  const [addProduct, { isLoading, isError }] = useAddProductMutation();
+  const [addProduct] = useAddProductMutation();
   const [formData, setFormData] = React.useState({
     image: "",
     title: "",
@@ -50,7 +50,7 @@ const AddProduct = () => {
       });
   };
   return (
-    <div className="w-full flex justify-center items-center h-[90vh]">
+    <div className="w-full flex justify-center items-center h-[90vh] px-4">
       <div className="w-md glass-card rounded-2xl p-8 shadow-xl border border-white/20 backdrop-blur-md mx-auto text-white">
         <h1 className="text-2xl font-semibold mb-4 text-center">
           Add New Product

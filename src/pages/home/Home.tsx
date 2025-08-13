@@ -9,7 +9,6 @@ import FeaturedProducts from "./components/FeaturedProducts";
 import { useEffect, useRef } from "react";
 
 import gsap from "gsap"; // <-- import GSAP
-import { useGSAP } from "@gsap/react"; // <-- import the hook from our React package
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -18,8 +17,10 @@ const Home = () => {
   const container = useRef(null);
   const sections = useRef([]);
 
-  const addToSections = (el) => {
+  const addToSections = (el: HTMLElement | null) => {
+    //@ts-expect-error el is possibly null
     if (el && !sections.current.includes(el)) {
+      //@ts-expect-error el is possibly null
       sections.current.push(el);
     }
   };
@@ -36,11 +37,11 @@ const Home = () => {
           gsap.to(section, {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 0.5,
             ease: "power2.out",
             scrollTrigger: {
               trigger: section,
-              start: "top 80%",
+              start: "top 90%",
               end: "bottom 20%",
               toggleActions: "play none none reverse",
             },
@@ -87,7 +88,7 @@ const Home = () => {
     <div ref={container} className="pt-16">
       <Hero />
 
-      <div className="space-y-28 my-28 max-w-7xl mx-4 md:mx-8 lg:mx-auto">
+      <div className="space-y-28 my-28 max-w-7xl mx-2 md:mx-8 lg:mx-auto">
         <div className=".animate-section" ref={addToSections}>
           <ShopFeatures />
         </div>

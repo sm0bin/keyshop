@@ -26,7 +26,7 @@ const choosePoints = [
 
 const WhyChooseMechanical: React.FC = () => {
   return (
-    <section className="grid grid-cols-2 gap-20">
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-20">
       <div>
         <div className=" mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-white">

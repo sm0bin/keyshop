@@ -72,11 +72,11 @@ const ShopFeatures = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6">
         {shopFeatures.map((feature) => (
           <div
             key={feature.id}
-            className="backdrop-blur-md bg-white/10 border border-white/10 p-6 rounded-2xl text-white shadow-lg hover:bg-white/20 transition"
+            className="backdrop-blur-md bg-white/10 border border-white/10 p-4 md:p-6 rounded-2xl text-white shadow-lg hover:bg-white/20 transition"
           >
             <feature.icon className="w-8 h-8 mb-4 text-blue-400" />
             <h4 className="text-xl font-semibold mb-1">{feature.title}</h4>

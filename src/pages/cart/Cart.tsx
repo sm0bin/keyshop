@@ -28,6 +28,7 @@ import { useAppSelector } from "@/redux/hook";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import Spinner from "@/components/ui/spinner";
+import { Input } from "@/components/ui/input";
 
 const Cart = () => {
   const [quantity, setQuantity] = useState(1);
@@ -52,10 +53,6 @@ const Cart = () => {
     // updateCartItem({ productId, quantity: newQuantity });
     updateCartItem({ productId, quantity: newQuantity });
     // refetch();
-  };
-
-  const handleAddItem = (id: string) => {
-    addItemToCart(id);
   };
 
   const handleRemoveItem = (id: string) => {
@@ -165,7 +162,7 @@ const Cart = () => {
                             >
                               <Minus className="w-4 h-4 text-white" />
                             </button>
-                            <input
+                            <Input
                               type="number"
                               value={item.quantity}
                               onChange={(e) => {
@@ -179,7 +176,6 @@ const Cart = () => {
                                 }
                               }}
                               min="1"
-                              className="text-white font-bold text-lg min-w-[3rem] text-center bg-white/10 rounded-lg py-2 px-4 border border-white/20 focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
                               disabled={isUpdating}
                             />
                             <button

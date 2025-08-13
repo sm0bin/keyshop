@@ -16,7 +16,7 @@ const FeaturedProducts = () => {
     console.error("Error loading products:", error);
     return (
       <div className="text-red-500 text-center flex flex-col items-center justify-center h-screen">
-        <p>Error loading products: {error?.message || "Unknown error"}</p>
+        <p>Error loading products.</p>
       </div>
     );
   }
@@ -31,7 +31,7 @@ const FeaturedProducts = () => {
         </h2>
         <p className="text-gray-300 mt-2">Keyboards for every type of gamer</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6">
         {products?.slice(0, 6).map((product: IProduct) => (
           <ProductCard key={product._id} product={product} />
         ))}

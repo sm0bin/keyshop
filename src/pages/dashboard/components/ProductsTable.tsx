@@ -31,7 +31,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -44,7 +43,7 @@ import Spinner from "@/components/ui/spinner";
 
 const ProductsTable = () => {
   const { data, isLoading, isError } = useGetProductsQuery(undefined);
-  const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
   const [updateProduct, { isLoading: isUpdating }] = useUpdateProductMutation();
   const products = data?.data || [];
 
@@ -122,7 +121,7 @@ const ProductsTable = () => {
   return (
     <section className="px-4 md:px-8">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">
           Products List
         </h2>
         <Link to="add-products">Add Product</Link>

@@ -12,6 +12,8 @@ import {
   Clock,
   Send,
 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const ContactUs = () => {
   const headingRef = useRef(null);
@@ -40,6 +42,7 @@ const ContactUs = () => {
 
     // Animate contact info cards
     tl.fromTo(
+      //@ts-expect-error socialRef is possibly null
       contactInfoRef.current?.children || [],
       { opacity: 0, x: -30, scale: 0.9 },
       {
@@ -55,6 +58,7 @@ const ContactUs = () => {
 
     // Animate social media icons
     tl.fromTo(
+      //@ts-expect-error socialRef is possibly null
       socialRef.current?.children || [],
       { opacity: 0, y: 20, rotation: -180 },
       {
@@ -163,7 +167,7 @@ const ContactUs = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           {/* Contact Information */}
           <div className="space-y-6">
             {/* Contact Form */}
@@ -176,34 +180,22 @@ const ContactUs = () => {
                   Send us a Message
                 </h3>
 
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="contact-input bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
-                    required
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="contact-input bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
-                    required
-                  />
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                  <Input type="text" placeholder="Your Name" required />
+                  <Input type="email" placeholder="Your Email" required />
                 </div>
-
-                <input
+                <Input
                   type="text"
                   placeholder="Subject"
-                  className="contact-input w-full bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 mb-6"
+                  className="mb-4"
                   required
                 />
-
-                <textarea
+                <Textarea
                   rows={5}
                   placeholder="Your Message"
-                  className="contact-input w-full bg-transparent border border-white/20 rounded-lg px-4 py-4 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300 mb-6 resize-none"
+                  className="min-h-56 mb-4"
                   required
-                ></textarea>
+                ></Textarea>
 
                 <Button type="submit" className="w-full">
                   <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />

@@ -518,7 +518,7 @@ const Checkout = () => {
 
               {/* Submit Button */}
               <Card className="">
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid md:grid-cols-2 gap-2">
                   <Button
                     variant={"secondary"}
                     onClick={handleCashOnDelivery}

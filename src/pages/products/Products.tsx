@@ -3,6 +3,7 @@ import ProductCard from "@/components/shared/ProductCard";
 import { useGetProductsQuery } from "@/redux/features/product/productApi";
 import { Button } from "@/components/ui/button";
 import Spinner from "@/components/ui/spinner";
+import type { IProduct } from "@/types";
 
 const Products = () => {
   // Filter and search states
@@ -56,7 +57,7 @@ const Products = () => {
     console.error("Error loading products:", isError);
     return (
       <div className="text-red-500 text-center flex flex-col items-center justify-center h-screen">
-        <p>Error loading products: {isError?.message || "Unknown error"}</p>
+        <p>Error loading products.</p>
       </div>
     );
   }
@@ -202,8 +203,8 @@ const Products = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((product: IProduct) => (
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       )}
