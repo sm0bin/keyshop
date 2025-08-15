@@ -15,6 +15,7 @@ import {
 import type { ICartItem } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import { Link as RouteLink } from "react-router-dom";
 import Spinner from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 
@@ -54,13 +55,13 @@ const Cart = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Link
+            <RouteLink
               to={-1}
               variant={"ghost"}
               className="p-2 hover:bg-white/10 rounded-full transition-colors"
             >
               <ArrowLeft className="w-6 h-6 text-white" />
-            </Link>
+            </RouteLink>
             <h1 className="text-4xl font-bold text-white flex items-center gap-3">
               <ShoppingBag className="w-8 h-8" />
               Shopping Cart

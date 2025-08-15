@@ -1,12 +1,5 @@
 import { baseApi } from "../../api/baseApi";
 
-interface TProductQueryParams {
-  search?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  sortBy?: string;
-}
-
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({

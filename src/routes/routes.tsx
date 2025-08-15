@@ -14,7 +14,6 @@ import AddProduct from "@/pages/dashboard/components/AddProduct";
 import ProductDetails from "@/pages/productDetails/ProductDetails";
 import Checkout from "@/pages/checkout/Checkout";
 import Return from "@/pages/stripe/Return";
-import CheckoutForm from "@/pages/stripe/CheckoutForm";
 import Success from "@/pages/stripe/Success";
 import Cancel from "@/pages/stripe/Cancel";
 import OrderConfirmation from "@/pages/checkout/OrderConfirmation";
@@ -86,14 +85,6 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <OrderConfirmation />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/checkout-form",
-        element: (
-          <ProtectedRoute>
-            <CheckoutForm />
           </ProtectedRoute>
         ),
       },
