@@ -7,11 +7,11 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { verifyToken } from "@/utils/funs/verifyToken";
 import { useAppDispatch } from "@/redux/hook";
-import { setUser, type IUser } from "@/redux/features/auth/authSlice";
+import { setUser } from "@/redux/features/auth/authSlice";
 import { Card } from "@/components/ui/card";
 
 export default function Login() {
-  const [loginUser, { isLoading, isError }] = useLoginMutation();
+  const [loginUser, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({

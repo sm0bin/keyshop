@@ -49,7 +49,7 @@ const ProductsTable = () => {
 
   // State for each product's edit form
   const [editingProduct, setEditingProduct] = React.useState({
-    id: "",
+    _id: "",
     image: "",
     title: "",
     brand: "",
@@ -67,7 +67,7 @@ const ProductsTable = () => {
   if (isError) {
     return (
       <div className="text-red-500 text-center flex flex-col items-center justify-center h-screen">
-        <p>Error loading products: {isError?.message || "Unknown error"}</p>
+        <p>Error loading products: {"Unknown error"}</p>
       </div>
     );
   }
@@ -77,7 +77,7 @@ const ProductsTable = () => {
       await deleteProduct(id).unwrap();
       toast.success("Product deleted successfully!");
     } catch (error) {
-      toast.error(error.data?.message || "Failed to delete product.");
+      toast.error("Failed to delete product.");
     }
   };
 
@@ -95,7 +95,9 @@ const ProductsTable = () => {
     setDialogOpen(true);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value, type } = e.target;
     setEditingProduct((prev) => ({
       ...prev,
@@ -103,7 +105,7 @@ const ProductsTable = () => {
     }));
   };
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!editingProduct) return;
 
@@ -111,9 +113,18 @@ const ProductsTable = () => {
       await updateProduct(editingProduct).unwrap();
       toast.success("Product updated successfully!");
       setDialogOpen(false);
-      setEditingProduct(null);
+      setEditingProduct({
+        _id: "",
+        image: "",
+        title: "",
+        brand: "",
+        quantity: 0,
+        price: 0,
+        rating: 0,
+        description: "",
+      });
     } catch (error) {
-      toast.error(error.message || "Failed to update product.");
+      toast.error("Failed to update product.");
       console.error("Error updating product:", error);
     }
   };
@@ -141,7 +152,7 @@ const ProductsTable = () => {
             </TableRow>
           </TableHeader>
           <TableBody className="divide-y divide-white/10 border-t border-white/20">
-            {products?.map((product) => (
+            {products?.map((product: IProduct) => (
               <TableRow key={product._id}>
                 <TableCell>
                   <img

@@ -120,7 +120,9 @@ const CustomizableOptions: React.FC = () => {
         {options.map((item, i) => (
           <div
             key={item.id}
-            ref={(el) => (cardsRef.current[i] = el)}
+            ref={(el) => {
+              cardsRef.current[i] = el;
+            }}
             className={`relative rounded-2xl overflow-hidden group col-span-${item.colSpan} row-span-${item.rowSpan} shadow-lg`}
           >
             <div

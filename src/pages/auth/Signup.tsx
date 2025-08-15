@@ -15,8 +15,7 @@ import {
 } from "@/components/ui/select";
 
 export default function Signup() {
-  //   const dispatch = useAppDispatch();
-  const [createUser, { data, isLoading, isError }] = useCreateUserMutation();
+  const [createUser, { isLoading }] = useCreateUserMutation();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",

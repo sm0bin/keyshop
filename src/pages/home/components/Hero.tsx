@@ -5,8 +5,14 @@ import { heroSlides } from "@/utils/data/data";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
+interface IArrowProps {
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}
+
+function SampleNextArrow(props: IArrowProps | null) {
+  const { className, style, onClick } = props || {};
   return (
     <div
       className={className}
@@ -20,8 +26,8 @@ function SampleNextArrow(props) {
   );
 }
 
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
+function SamplePrevArrow(props: IArrowProps | null) {
+  const { className, style, onClick } = props || {};
   return (
     <div
       className={className}
@@ -47,7 +53,7 @@ const Hero = () => {
     arrows: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    appendDots: (dots: any) => (
+    appendDots: (dots: React.ReactNode) => (
       <div
         style={{
           //   backgroundColor: "#ddd",

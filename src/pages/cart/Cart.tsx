@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   ShoppingCart,
   Plus,
@@ -6,46 +5,26 @@ import {
   Trash2,
   ShoppingBag,
   ArrowLeft,
-  LoaderPinwheel,
-  Loader,
 } from "lucide-react";
 import {
-  useAddItemToCartMutation,
   useClearCartMutation,
   useGetCartQuery,
   useRemoveItemFromCartMutation,
   useUpdateCartItemMutation,
 } from "@/redux/features/cart/cartApi";
 import type { ICartItem } from "@/types";
-// import {
-//   addItemToCart,
-//   clearCart,
-//   removeItemFromCart,
-//   // updateCartItem,
-// } from "@/redux/features/cart/cartSlice";
-import { useAppSelector } from "@/redux/hook";
-// import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import Spinner from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 
 const Cart = () => {
-  const [quantity, setQuantity] = useState(1);
-  const { data, isLoading, error, isError, refetch } =
-    useGetCartQuery(undefined);
-  const [addItemToCart, { isLoading: isAdding }] = useAddItemToCartMutation();
+  const { data, isLoading } = useGetCartQuery(undefined);
   const [updateCartItem, { isLoading: isUpdating }] =
     useUpdateCartItemMutation();
   const [removeItemFromCart, { isLoading: isRemoving }] =
     useRemoveItemFromCartMutation();
   const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
-
-  // const cart = useAppSelector((state) => state.cart);
-  // const { items, totalAmount, totalItems } = cart;
-  // console.log("Cart items:", cart);
-  // Fix data structure access - adjust based on your actual API response
-  // console.log("Cart data:", data);
   const { userId, items, totalItems, totalAmount } = data?.data || data || {};
 
   const handleQuantityChange = (productId: string, newQuantity: number) => {
@@ -126,8 +105,14 @@ const Cart = () => {
                     {/* Product Image */}
                     <div className="flex-shrink-0">
                       <img
-                        src={item.product.image}
-                        alt={item.product.title}
+                        src={
+                          item?.product?.image ||
+                          "https://via.placeholder.com/150"
+                        }
+                        alt={
+                          item?.product?.title ||
+                          "https://via.placeholder.com/150"
+                        }
                         className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-xl border border-white/20 shadow-md"
                       />
                     </div>
@@ -136,10 +121,10 @@ const Cart = () => {
                     <div className="flex-1 space-y-4">
                       <div>
                         <h3 className="text-white font-semibold text-lg leading-tight">
-                          {item.product.title}
+                          {item?.product?.title || "Product Title"}
                         </h3>
                         <p className="text-white/60 text-sm mt-2">
-                          Price: ${item.product.price.toFixed(2)}
+                          Price: ${item?.product?.price?.toFixed(2) || "0.00"}
                         </p>
                       </div>
 

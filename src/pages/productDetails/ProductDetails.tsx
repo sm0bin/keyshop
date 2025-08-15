@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import {
   Star,
@@ -19,7 +19,13 @@ import { Button } from "@/components/ui/button";
 import { useAddItemToCartMutation } from "@/redux/features/cart/cartApi";
 import { toast } from "sonner";
 
-const StarRating = ({ rating, totalStars = 5 }) => {
+const StarRating = ({
+  rating,
+  totalStars = 5,
+}: {
+  rating: number;
+  totalStars?: number;
+}) => {
   return (
     <div className="flex items-center gap-1">
       {[...Array(totalStars)].map((_, index) => (
@@ -81,7 +87,7 @@ const ProductDetails = () => {
 
   const product = data?.data;
 
-  const handleQuantityChange = (change) => {
+  const handleQuantityChange = (change: number) => {
     setQuantity((prev) =>
       Math.max(1, Math.min(product.quantity, prev + change))
     );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ShoppingCart,
   MapPin,
@@ -23,9 +23,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import type { ICartItem } from "@/types";
 
 const Checkout = () => {
-  // Sample cart data - in real app this would come from props or context
   const [shippingAddress, setShippingAddress] = useState({
     country: "Bangladesh",
     zipCode: "",
@@ -44,12 +44,10 @@ const Checkout = () => {
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const { data, isLoading, isError } = useGetCartQuery(undefined);
-  const [updateCartAddress, { isLoading: isUpdating }] =
-    useUpdateCartAddressMutation();
-  const [createCheckoutSession, { isLoading: isCreating }] =
-    useCreateCheckoutSessionMutation();
+  const [updateCartAddress] = useUpdateCartAddressMutation();
+  const [createCheckoutSession] = useCreateCheckoutSessionMutation();
   const navigate = useNavigate();
-  const [updateCart, { isLoading: isUpdatingCart }] = useUpdateCartMutation();
+  const [updateCart] = useUpdateCartMutation();
 
   // Add this useEffect hook
   useEffect(() => {
@@ -85,42 +83,40 @@ const Checkout = () => {
     discount: null,
   };
 
-  const bangladeshDistricts = [
-    "Dhaka",
-    "Chittagong",
-    "Rajshahi",
-    "Khulna",
-    "Barisal",
-    "Sylhet",
-    "Rangpur",
-    "Mymensingh",
-    "Comilla",
-    "Narayanganj",
-    "Gazipur",
-    "Tangail",
-    "Narsingdi",
-    "Manikganj",
-    "Munshiganj",
-  ];
+  type ShippingAddressField =
+    | "zipCode"
+    | "district"
+    | "thana"
+    | "address"
+    | "phone";
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
+    const fieldName = name as ShippingAddressField;
     setShippingAddress((prev) => ({
       ...prev,
-      [name]: value,
+      [fieldName]: value,
     }));
 
     // Clear error when user starts typing
-    if (errors[name]) {
+    if (errors[fieldName]) {
       setErrors((prev) => ({
         ...prev,
-        [name]: "",
+        [fieldName]: "",
       }));
     }
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors = {
+      zipCode: "",
+      district: "",
+      thana: "",
+      address: "",
+      phone: "",
+    };
 
     if (!shippingAddress.zipCode.trim()) {
       newErrors.zipCode = "Zip code is required";
@@ -200,11 +196,7 @@ const Checkout = () => {
       }
     } catch (error) {
       console.error("Checkout error:", error);
-      toast.error(
-        error?.data?.message ||
-          error?.message ||
-          "Something went wrong. Please try again."
-      );
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setIsProcessing(false);
     }
@@ -290,21 +282,27 @@ const Checkout = () => {
               </h2>
 
               <div className="space-y-4 mb-6">
-                {cartData.items.map((item) => (
+                {cartData.items.map((item: ICartItem) => (
                   <div
                     key={item.productId}
                     className="flex items-center space-x-4"
                   >
                     <div className="w-12 h-12 bg-gray-700 rounded border border-white/20">
                       <img
-                        src={item.product.image}
-                        alt={item.product.title}
+                        src={
+                          item?.product?.image ||
+                          "https://via.placeholder.com/150"
+                        }
+                        alt={
+                          item?.product?.title ||
+                          "https://via.placeholder.com/150"
+                        }
                         className="w-full h-full object-cover rounded"
                       />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-medium text-white">
-                        {item.product.title}
+                        {item?.product?.title || "Unknown Product"}
                       </h3>
                       <p className="text-sm text-gray-300">
                         Quantity: {item.quantity}
