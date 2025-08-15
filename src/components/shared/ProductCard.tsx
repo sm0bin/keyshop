@@ -3,10 +3,7 @@ import { useAddItemToCartMutation } from "@/redux/features/cart/cartApi";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);

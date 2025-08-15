@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { CircleUserRound, ShoppingBasket } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { logout, selectUser } from "@/redux/features/auth/authSlice";
 import { useGetCartQuery } from "@/redux/features/cart/cartApi";
@@ -16,6 +15,22 @@ import {
 import { useEffect } from "react";
 import { useGetProfileQuery } from "@/redux/features/auth/authApi";
 import { Link as CustomLink } from "@/components/ui/link";
+import {
+  CircleUserRound,
+  ShoppingBasket,
+  Home,
+  Package,
+  Info,
+  MessageSquare,
+} from "lucide-react";
+import { SidebarTrigger } from "../ui/sidebar";
+
+const navLinks = [
+  { label: "Home", path: "/", icon: Home },
+  { label: "Products", path: "/products", icon: Package },
+  { label: "About Us", path: "/about", icon: Info },
+  { label: "Contact Us", path: "/contact", icon: MessageSquare },
+];
 
 const Header = () => {
   const [lastScrollTop, setLastScrollTop] = React.useState(0);
@@ -23,20 +38,11 @@ const Header = () => {
   const user = useAppSelector(selectUser);
   const isLoggedIn = user && Object.keys(user).length > 0;
   const { data, isLoading: isCartLoading } = useGetCartQuery(undefined);
-  // RTK Query hook to fetch profile data
   const { data: profile, isLoading: isProfileLoading } =
     useGetProfileQuery(undefined);
 
   const profileData = profile?.data || null;
   const dispatch = useAppDispatch();
-
-  const navLinks = [
-    { label: "Home", path: "/" },
-    { label: "Products", path: "/products" },
-    { label: "About Us", path: "/about" },
-    { label: "Contact Us", path: "/contact" },
-    // { label: "Dashboard", path: `/dashboard` },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,8 +66,9 @@ const Header = () => {
 
   return (
     <nav
-      className={`py-4 px-6 flex items-center justify-between ${navbarStyle} transition-transform duration-300 ease-in-out fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/10 border border-white/10  shadow-lg hover:transition flex-col md:flex-row gap-6`}
+      className={`py-4 px-2 md:px-6 flex items-center  gap-6 md:justify-between ${navbarStyle} transition-transform duration-300 ease-in-out fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/10 border border-white/10  shadow-lg hover:transition `}
     >
+      <SidebarTrigger className="text-white md:hidden" />
       {/* Logo */}
       <Link
         className="text-xl md:text-2xl font-bold text-white rounded-md"
@@ -69,9 +76,8 @@ const Header = () => {
       >
         MechaKeys
       </Link>
-
       {/* Navigation links */}
-      <div className="flex flex-col md:flex-row items-center gap-1 font-medium text-base md:text-lg text-white">
+      <div className="hidden md:flex flex-col md:flex-row items-center gap-1 font-medium text-base md:text-lg text-white">
         {navLinks.map((link) => (
           <NavLink
             className="px-3 py-1 rounded-md hover:bg-white/10"
@@ -93,7 +99,7 @@ const Header = () => {
       </div>
 
       {/* Cart and Profile */}
-      <div className="flex items-center gap-6 text-white">
+      <div className="hidden md:flex items-center gap-6 text-white">
         {isLoggedIn && (
           <Link to="/cart" className="relative">
             <ShoppingBasket size={32} strokeWidth="1" />

@@ -218,7 +218,7 @@ const ProductsTable = () => {
           </DialogHeader>
           <form onSubmit={handleUpdate}>
             <div className="grid gap-4">
-              <div className="grid gap-3">
+              <div className="">
                 <Label htmlFor="image">Image URL</Label>
                 <Input
                   className="border border-white/20"
@@ -228,7 +228,7 @@ const ProductsTable = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="grid gap-3">
+              <div className="">
                 <Label htmlFor="title">Title</Label>
                 <Input
                   className="border border-white/20"
@@ -238,55 +238,57 @@ const ProductsTable = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="grid gap-3">
-                <Label htmlFor="brand">Brand</Label>
-                <Input
-                  className="border border-white/20"
-                  id="brand"
-                  name="brand"
-                  value={editingProduct?.brand || ""}
-                  onChange={handleInputChange}
-                />
+              <div className="grid grid-cols-2 gap-2">
+                <div className="">
+                  <Label htmlFor="brand">Brand</Label>
+                  <Input
+                    className="border border-white/20"
+                    id="brand"
+                    name="brand"
+                    value={editingProduct?.brand || ""}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="">
+                  <Label htmlFor="quantity">Quantity</Label>
+                  <Input
+                    className="border border-white/20"
+                    id="quantity"
+                    name="quantity"
+                    type="number"
+                    value={editingProduct?.quantity || 0}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="">
+                  <Label htmlFor="rating">Rating</Label>
+                  <Input
+                    className="border border-white/20"
+                    id="rating"
+                    name="rating"
+                    type="number"
+                    step="0.1"
+                    min="0"
+                    max="5"
+                    value={editingProduct?.rating || 0}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="">
+                  <Label htmlFor="price">Price</Label>
+                  <Input
+                    className="border border-white/20"
+                    id="price"
+                    name="price"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={editingProduct?.price || 0}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
-              <div className="grid gap-3">
-                <Label htmlFor="quantity">Quantity</Label>
-                <Input
-                  className="border border-white/20"
-                  id="quantity"
-                  name="quantity"
-                  type="number"
-                  value={editingProduct?.quantity || 0}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="rating">Rating</Label>
-                <Input
-                  className="border border-white/20"
-                  id="rating"
-                  name="rating"
-                  type="number"
-                  step="0.1"
-                  min="0"
-                  max="5"
-                  value={editingProduct?.rating || 0}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="price">Price</Label>
-                <Input
-                  className="border border-white/20"
-                  id="price"
-                  name="price"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={editingProduct?.price || 0}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="grid gap-3">
+              <div className="">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
                   className="border border-white/20"
