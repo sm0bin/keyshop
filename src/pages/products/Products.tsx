@@ -57,7 +57,7 @@ const Products = () => {
     console.error("Error loading products:", isError);
     return (
       <div className="text-red-500 text-center flex flex-col items-center justify-center h-screen">
-        <p>Error loading products.</p>
+        <p>Error loading products!</p>
       </div>
     );
   }
