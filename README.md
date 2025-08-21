@@ -1,69 +1,86 @@
-# React + TypeScript + Vite
+# Mechanical Keyboard Shop (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+The frontend of the **Mechanical Keyboard Shop** is a modern and responsive single-page application (SPA) built with React, Redux, and TypeScript. It provides an intuitive shopping experience for mechanical keyboard enthusiasts with features like product browsing, filtering, cart management, and checkout.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Description
 
-## Expanding the ESLint configuration
+The client-side application is designed to deliver a seamless e-commerce experience. It allows users to explore mechanical keyboards, view detailed product information, manage carts, and place orders. It integrates with the backend via REST APIs to fetch and update data dynamically.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Responsive and modern UI/UX with smooth navigation.
+- Homepage with featured products, hero banner, brand highlights, and testimonials.
+- Products page with **search, filtering, and sorting** functionality.
+- Product details page with full information and **add-to-cart** system.
+- Dynamic shopping cart with **quantity management** and price calculation.
+- Checkout page supporting **Cash on Delivery** and optional **Stripe integration**.
+- Admin dashboard with **product management (create, update, delete)**.
+- Debounce search functionality to reduce API load.
+- Page refresh warning when the cart is not empty.
+- Micro animations and responsive design for mobile and desktop.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Technology Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **React (Vite + TypeScript)**
+- **Redux Toolkit & RTK Query**
+- **React Router DOM**
+- **Tailwind CSS** (UI styling)
+- **shadcn** (UI components)
+- **Axios** (API requests)
+- **Stripe**
+
+## Installation Guideline
+
+### Prerequisites
+
+- Node.js (>=18)
+- npm or yarn
+
+### Installation Steps
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/sm0bin/keyshop.git
+   cd keyshop
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start development server:
+
+   ```bash
+   npm run dev
+   ```
+
+### Configuration
+
+Create a `.env` file in the root directory:
+
+```bash
+VITE_BASE_URL=http://localhost:5000/api/v1
+VITE_STRIPE_PUBLISHABLE_KEY=XXXX
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Run the development server using `npm run dev`.
+2. Open the app in your browser at `http://localhost:5173`.
+3. Browse products, add to cart, and place an order.
+4. Admins can manage products via the **Dashboard**.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## Live Deployment 🌐
+
+[Client App](https://keyshop-gilt.vercel.app/)
+
+## GitHub Repository 📂
+
+[Frontend Repository](https://github.com/sm0bin/keyshop)
